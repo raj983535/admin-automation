@@ -1,0 +1,330 @@
+.flowCanvas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg-app);
+  min-width: 0;
+}
+
+.canvasContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-6);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  text-align: center;
+  color: var(--color-text-secondary);
+  position: relative;
+  max-width: 400px;
+}
+
+.emptyIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: var(--color-ivory);
+  border-radius: 50%;
+  margin-bottom: var(--space-4);
+  color: var(--color-gold);
+}
+
+.emptyTitle {
+  margin: 0 0 var(--space-2) 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+.emptyDescription {
+  margin: 0 0 var(--space-6) 0;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+.emptyButton {
+  gap: var(--space-2);
+}
+
+.addMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  box-shadow: var(--shadow-lg);
+  z-index: 20;
+  min-width: 160px;
+  margin-top: var(--space-2);
+}
+
+.addMenuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background var(--transition-fast);
+  text-align: left;
+}
+
+.addMenuItem:hover {
+  background: var(--color-ivory);
+}
+
+.menuItemColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.funnelFlow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 700px;
+  padding: var(--space-4);
+}
+
+.stepContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.stepCard {
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+  min-height: 100px;
+}
+
+.stepCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.stepCard.selected {
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.stepContent {
+  padding: var(--space-4);
+  color: white;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.stepInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.stepName {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  font-family: var(--font-sans);
+}
+
+.stepType {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stepActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.actionButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.dragHandle {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: grab;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.stepMetrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--space-4);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.metricValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  font-family: var(--font-sans);
+}
+
+.metricLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.flowArrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-gold);
+}
+
+.arrowIcon {
+  color: var(--color-gold);
+}
+
+.flowRate {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  background: var(--color-gold-soft);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 4px;
+}
+
+.addStepContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+.addStepButton {
+  gap: var(--space-2);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .canvasContent {
+    padding: var(--space-4);
+  }
+
+  .funnelFlow {
+    max-width: 100%;
+    padding: var(--space-3);
+  }
+
+  .stepMetrics {
+    gap: var(--space-3);
+  }
+}
+
+@media (max-width: 768px) {
+  .canvasContent {
+    padding: var(--space-3);
+  }
+
+  .funnelFlow {
+    gap: var(--space-3);
+    padding: var(--space-2);
+  }
+
+  .stepCard {
+    min-height: 80px;
+  }
+
+  .stepContent {
+    padding: var(--space-3);
+  }
+
+  .stepName {
+    font-size: 14px;
+  }
+
+  .stepMetrics {
+    gap: var(--space-2);
+  }
+
+  .metricValue {
+    font-size: 14px;
+  }
+
+  .actionButton {
+    width: 24px;
+    height: 24px;
+  }
+}

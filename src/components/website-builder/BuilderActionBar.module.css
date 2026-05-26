@@ -1,0 +1,167 @@
+.actionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-3);
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.leftSection,
+.centerSection,
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.viewModeToggle,
+.previewModeToggle,
+.panelToggles,
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.modeButton {
+  gap: var(--space-1);
+}
+
+.buttonText {
+  display: inline;
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 240px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-input);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.clearSearch {
+  position: absolute;
+  right: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.clearSearch:hover {
+  background: var(--color-soft-beige);
+  color: var(--color-text-primary);
+}
+
+.saveButton,
+.publishButton {
+  gap: var(--space-1);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .searchBox {
+    width: 200px;
+  }
+
+  .buttonText {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .actionBar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .leftSection,
+  .centerSection,
+  .rightSection {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .searchBox {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .buttonText {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .actionBar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-3);
+    height: auto;
+  }
+
+  .leftSection,
+  .centerSection,
+  .rightSection {
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .viewModeToggle,
+  .previewModeToggle,
+  .panelToggles,
+  .actionButtons {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .searchBox {
+    max-width: 100%;
+  }
+
+  .buttonText {
+    display: none;
+  }
+}

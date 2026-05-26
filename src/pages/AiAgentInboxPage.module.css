@@ -1,0 +1,703 @@
+/* AI Agent Inbox stylesheet — Conversational Dashboard Theme */
+
+.headerBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.headerTitle {
+  font-family: var(--font-serif);
+  font-weight: var(--weight-semibold);
+  color: var(--color-brown-dark);
+  font-size: var(--text-2xl);
+}
+
+.headerSubtitle {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  margin-top: var(--space-1);
+}
+
+/* KPI Micro-Cards */
+.miniStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.statsCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.statsCard span {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statsCard strong {
+  font-size: var(--text-lg);
+  font-family: var(--font-serif);
+  color: var(--color-brown-dark);
+  margin-top: var(--space-1);
+}
+
+/* Three-column Dashboard Layout */
+.inboxLayoutGrid {
+  display: grid;
+  grid-template-columns: 320px 1fr 300px;
+  gap: var(--space-4);
+  height: calc(100vh - var(--navbar-height) - 180px);
+  min-height: 520px;
+  align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+  .inboxLayoutGrid {
+    grid-template-columns: 280px 1fr;
+  }
+  .rightProfileDrawer {
+    display: none; /* Hide profile sidebar on smaller monitors */
+  }
+}
+
+@media (max-width: 1024px) {
+  .inboxLayoutGrid {
+    grid-template-columns: 1fr;
+    height: calc(100vh - var(--navbar-height) - 140px);
+  }
+  .rightProfileDrawer {
+    display: none;
+  }
+  
+  /* Single-panel mobile view toggling */
+  .inboxLayoutGrid.showListView .leftQueuePanel {
+    display: flex;
+    width: 100%;
+  }
+  .inboxLayoutGrid.showListView .centerChatPanel {
+    display: none;
+  }
+  
+  .inboxLayoutGrid.showChatView .leftQueuePanel {
+    display: none;
+  }
+  .inboxLayoutGrid.showChatView .centerChatPanel {
+    display: flex;
+    width: 100%;
+  }
+
+  .mobileBackBtn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: transparent;
+    border: none;
+    color: var(--color-gold);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    padding: var(--space-1) var(--space-2) var(--space-1) 0;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .mobileBackBtn:hover {
+    background: var(--color-soft-beige);
+    color: var(--color-brown-dark);
+  }
+}
+
+@media (min-width: 1025px) {
+  .mobileBackBtn {
+    display: none !important;
+  }
+}
+
+/* Column 1: Conversations List Queue */
+.leftQueuePanel {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panelHeaderBlock {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-ivory);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.searchContainer {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-gray-mid);
+}
+
+.queueSearchInput {
+  width: 100%;
+  padding: 6px var(--space-3) 6px 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-input);
+  font-size: 12px;
+  color: var(--color-text-primary);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.queueSearchInput:focus {
+  border-color: var(--color-gold);
+}
+
+.queueFilters {
+  display: flex;
+  gap: var(--space-1);
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.queueFilters::-webkit-scrollbar {
+  height: 2px;
+}
+
+.queueFilters::-webkit-scrollbar-thumb {
+  background: var(--color-light-gray);
+  border-radius: 2px;
+}
+
+.filterBtn {
+  background: transparent;
+  border: none;
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.filterBtn:hover {
+  background: var(--color-soft-beige);
+  color: var(--color-brown-dark);
+}
+
+.filterBtnActive {
+  background: var(--color-gold);
+  color: var(--color-bg-card) !important;
+}
+
+.conversationsList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.emptyInboxList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: var(--space-4);
+  text-align: center;
+  gap: var(--space-2);
+}
+
+.emptyInboxList span {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.inquiryListItem {
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding: var(--space-3);
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  transition: background var(--transition-fast);
+  background: var(--color-bg-card);
+}
+
+.inquiryListItem:hover {
+  background: var(--color-bg-input);
+}
+
+.inquirySelected {
+  background: var(--color-ivory) !important;
+  border-right: 1px solid var(--color-gold-border);
+}
+
+.inquiryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.studentName {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-brown-dark);
+}
+
+.lastMsgTime {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.inquirySubject {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: var(--space-1) 0 var(--space-2) 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inquiryFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.degreeTag {
+  font-size: 10px;
+  background: var(--color-soft-beige);
+  color: var(--color-muted-brown);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+/* Column 2: Center Unified Chat Console */
+.centerChatPanel {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chatHeader {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-warm-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.studentTitleMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.avatarIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-soft-beige);
+  color: var(--color-brown-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.studentTitleMeta h4 {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-brown-dark);
+}
+
+.studentTitleMeta span {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.messagesViewport {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  background: #fbf9f6;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  scroll-behavior: smooth;
+}
+
+.chatBubbleRow {
+  display: flex;
+  width: 100%;
+}
+
+.bubbleStudentRow {
+  justify-content: flex-start;
+}
+
+.bubbleAiRow, .bubbleAgentRow {
+  justify-content: flex-end;
+}
+
+.chatBubble {
+  max-width: 75%;
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-xs);
+  box-sizing: border-box;
+}
+
+.bubbleStudentRow .chatBubble {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+  border-bottom-left-radius: 0;
+}
+
+.bubbleAiRow .chatBubble {
+  background: var(--stage-purple-bg);
+  border: 1px solid var(--stage-purple-border);
+  color: var(--color-text-primary);
+  border-bottom-right-radius: 0;
+}
+
+.bubbleAgentRow .chatBubble {
+  background: var(--color-bg-sidebar);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  border-bottom-right-radius: 0;
+}
+
+.bubbleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+  gap: var(--space-4);
+}
+
+.senderLabel {
+  font-weight: var(--weight-semibold);
+}
+
+.msgTime {
+  opacity: 0.8;
+}
+
+.bubbleText {
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+/* AI Copilot Suggestion Box */
+.aiCopilotConsole {
+  margin: var(--space-3);
+  border: 1px solid var(--stage-purple-border);
+  background: var(--stage-purple-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.copilotHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--stage-purple-border);
+}
+
+.copilotTitle {
+  font-size: 11px;
+  font-weight: var(--weight-semibold);
+  color: var(--stage-purple-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.goldSparkle {
+  color: var(--color-gold);
+}
+
+.editingBadge {
+  font-size: 9px;
+  background: var(--color-gold);
+  color: var(--color-bg-card);
+  padding: 1px var(--space-1);
+  border-radius: var(--radius-sm);
+}
+
+.copilotBody {
+  padding: var(--space-3);
+}
+
+.draftText {
+  font-size: 12px;
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  font-style: italic;
+}
+
+.draftTextarea {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-gold-border);
+  padding: var(--space-2);
+  font-size: 12px;
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.copilotFooter {
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-card);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copilotConfidenceInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.purpleText {
+  color: var(--stage-purple-text) !important;
+}
+
+/* Manual Reply Field */
+.manualReplyBar {
+  padding: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-warm-white);
+  display: flex;
+  gap: var(--space-2);
+}
+
+.replyInputField {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-input);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.replyInputField:focus {
+  border-color: var(--color-gold);
+}
+
+/* Column 3: Right Profile Sidebar Drawer */
+.rightProfileDrawer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow-y: auto;
+}
+
+.profileCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.profileProgressSegment {
+  margin-bottom: var(--space-4);
+}
+
+.scoreRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-1);
+}
+
+.scoreBarBg {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-soft-beige);
+  overflow: hidden;
+}
+
+.scoreBarFill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.dossierGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.dossierItem {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-2);
+}
+
+.dossierItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dossierItem span {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dossierItem strong {
+  font-size: 12px;
+  color: var(--color-text-primary);
+  margin-top: 2px;
+}
+
+/* Qualification checklist tags */
+.checklistGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+.checkTagLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: var(--color-bg-card);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.checkTagLabel span {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.checkTagActive {
+  background: var(--color-gold-soft);
+  border-color: var(--color-gold);
+}
+
+.checkTagActive span {
+  color: var(--color-brown-dark);
+  font-weight: var(--weight-semibold);
+}
+
+.checkSquare {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--color-gray-mid);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-card);
+  flex-shrink: 0;
+}
+
+.checkTagActive .checkSquare {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+/* Operational Logs Timeline */
+.logsTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-1) 0;
+}
+
+.logItem {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.logDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: var(--space-1);
+  flex-shrink: 0;
+}
+
+.logContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.logContent span {
+  font-size: 11px;
+  color: var(--color-text-primary);
+}
+
+.logContent small {
+  font-size: 9px;
+  color: var(--color-text-muted);
+}
+
+/* Rotating Loader Animation Utility */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+:global(.spin-animation) {
+  animation: spin 1s linear infinite;
+}

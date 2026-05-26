@@ -1,0 +1,40 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+}
+
+.mainArea {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 0;
+  transition: margin-left var(--transition-base);
+}
+
+.mainArea.sidebarCollapsed {
+  margin-left: 72px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-sidebar) - 1);
+  background: rgba(61, 56, 50, 0.45);
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .mainArea,
+  .mainArea.sidebarCollapsed {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  .overlay {
+    display: none;
+  }
+}

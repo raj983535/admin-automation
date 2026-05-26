@@ -1,0 +1,410 @@
+.tabsNav {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 2px solid var(--color-border-subtle);
+  margin-bottom: var(--space-6);
+}
+
+.tabLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.tabLink:hover {
+  color: var(--color-brown-dark);
+}
+
+.tabLinkActive {
+  color: var(--color-brown-dark);
+  border-bottom-color: var(--color-gold);
+}
+
+.tabContent {
+  min-height: 0;
+}
+
+/* Dashboard Styles */
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.channelStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.channelCard {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+  overflow: hidden;
+}
+
+.channelCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+
+.channelCardEmail::before { background: var(--color-gold); }
+.channelCardWhatsApp::before { background: #25d366; }
+.channelCardSMS::before { background: var(--stage-purple-text); }
+
+.channelCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.channelCardHeader h4 {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-brown-dark);
+  margin: 0;
+}
+
+.channelMetricsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin: var(--space-1) 0;
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.metricItem span {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+.metricItem strong {
+  font-size: var(--text-lg);
+  color: var(--color-brown-dark);
+}
+
+.dashboardLayoutSplit {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .dashboardLayoutSplit {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bulkCampaignsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bulkCampaignsTable th,
+.bulkCampaignsTable td {
+  padding: var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+}
+
+.bulkCampaignsTable th {
+  font-weight: var(--weight-semibold);
+  color: var(--color-brown-dark);
+  background: var(--color-bg-sidebar);
+}
+
+.bulkCampaignsTable tr:hover {
+  background: var(--color-border-subtle);
+}
+
+.comparisonSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.comparisonRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.comparisonLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+}
+
+.comparisonBarBg {
+  background: var(--color-bg-sidebar);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.comparisonBarFill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+/* Broadcaster Wizard styles */
+.broadcasterGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .broadcasterGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wizardForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.formLabel span {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+}
+
+.formInput,
+.formSelect {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  background: var(--color-bg-input);
+  color: var(--color-text-primary);
+  width: 100%;
+}
+
+.formInput:focus,
+.formSelect:focus {
+  border-color: var(--color-gold);
+  outline: none;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.channelsSelectorBox {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  background: var(--color-bg-sidebar);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.channelCheckboxRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  background: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.channelCheckboxRow:hover {
+  border-color: var(--color-gold);
+}
+
+.channelCheckboxRow input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-gold);
+  cursor: pointer;
+}
+
+.channelCheckboxLabel {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.channelCheckboxLabel strong {
+  font-size: var(--text-xs);
+  color: var(--color-brown-dark);
+}
+
+.channelCheckboxLabel span {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+/* Template mapping slots inside form */
+.templateSlotsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-4);
+}
+
+.slotCard {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.slotCardTitle {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Execution monitor flow layout */
+.cascadeList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cascadeRow {
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cascadeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-2);
+}
+
+.cascadeHeader h4 {
+  font-family: var(--font-serif);
+  color: var(--color-brown-dark);
+  margin: 0;
+}
+
+.cascadeDesc {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+.stepsTimeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding: var(--space-2) 0;
+}
+
+.timelineNode {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
+  flex-grow: 1;
+  min-width: 140px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.timelineNode h5 {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--color-brown-dark);
+  margin: 0 0 2px;
+}
+
+.timelineNode p {
+  font-size: 9px;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.timelineConnector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-gold);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  min-width: 60px;
+}
+
+.timelineConnectorArrow {
+  width: 100%;
+  height: 2px;
+  background: var(--color-gold);
+  position: relative;
+}
+
+.timelineConnectorArrow::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--color-gold);
+}
+
+.timelineConnectorText {
+  margin-top: 2px;
+  font-size: 9px;
+  color: var(--color-muted-brown);
+}

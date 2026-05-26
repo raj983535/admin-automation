@@ -1,0 +1,49 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-weight: var(--weight-medium);
+  border-radius: 999px;
+  border: 1px solid var(--stage-border);
+  background: var(--stage-bg);
+  color: var(--stage-text);
+}
+
+.sm {
+  padding: 2px var(--space-2);
+  font-size: var(--text-xs);
+}
+.md {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.stage-blue {
+  --stage-bg: var(--stage-blue-bg);
+  --stage-text: var(--stage-blue-text);
+  --stage-border: var(--stage-blue-border);
+}
+.stage-purple {
+  --stage-bg: var(--stage-purple-bg);
+  --stage-text: var(--stage-purple-text);
+  --stage-border: var(--stage-purple-border);
+}
+.stage-orange {
+  --stage-bg: var(--stage-orange-bg);
+  --stage-text: var(--stage-orange-text);
+  --stage-border: var(--stage-orange-border);
+}
+.stage-yellow {
+  --stage-bg: var(--stage-yellow-bg);
+  --stage-text: var(--stage-yellow-text);
+  --stage-border: var(--stage-yellow-border);
+}
+.stage-green {
+  --stage-bg: var(--stage-green-bg);
+  --stage-text: var(--stage-green-text);
+  --stage-border: var(--stage-green-border);
+}
+.stage-gray {
+  --stage-bg: var(--stage-gray-bg);
+  --stage-text: var(--stage-gray-text);
+  --stage-border: var(--stage-gray-border);
+}

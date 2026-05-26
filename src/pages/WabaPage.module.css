@@ -1,0 +1,221 @@
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statusCard {
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--stage-blue-border);
+}
+
+.apiHealthBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.healthRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.healthLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.healthValue {
+  font-weight: var(--weight-bold);
+  color: var(--color-brown-dark);
+}
+
+.dotGreen {
+  width: 8px;
+  height: 8px;
+  background: var(--stage-green-text);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--stage-green-text);
+}
+
+.dotBlue {
+  width: 8px;
+  height: 8px;
+  background: var(--stage-blue-text);
+  border-radius: 50%;
+}
+
+/* Metadata lists */
+.metadataList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.metaItem {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2);
+  background: var(--color-bg-input);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+}
+
+.metaItem span {
+  color: var(--color-text-secondary);
+}
+
+.metaItem strong {
+  color: var(--color-brown-dark);
+}
+
+/* Template approval table */
+.templateTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.templateTable th,
+.templateTable td {
+  padding: var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+}
+
+.templateTable th {
+  background: var(--color-bg-sidebar);
+  color: var(--color-brown-dark);
+  font-weight: var(--weight-semibold);
+}
+
+/* Analytics columns */
+.costSplitRow {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.costCol {
+  flex: 1;
+  background: var(--color-bg-sidebar);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.costCol span {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  display: block;
+}
+
+.costCol h4 {
+  font-size: var(--text-lg);
+  font-family: var(--font-sans);
+  margin-top: var(--space-1);
+}
+
+/* Submission Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(40, 30, 25, 0.6);
+  
+  z-index: var(--z-modal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border-top: 5px solid var(--color-gold);
+  width: 480px;
+  max-width: 95%;
+  padding: var(--space-5);
+  box-shadow: var(--shadow-lg);
+  animation: modalSlide 250ms ease-out;
+}
+
+@keyframes modalSlide {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalContent h3 {
+  font-size: var(--text-lg);
+  color: var(--color-brown-dark);
+  margin-bottom: var(--space-1);
+}
+
+.modalDesc {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.formLabel span {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  background: var(--color-bg-input);
+  width: 100%;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  border-color: var(--color-gold);
+  outline: none;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}

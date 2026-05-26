@@ -1,0 +1,193 @@
+.actionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-4);
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.leftSection,
+.centerSection,
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.viewModeToggle,
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.modeButton {
+  gap: 6px;
+}
+
+.metricsDisplay {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.metricCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-ivory);
+  border-radius: 6px;
+  min-width: 70px;
+}
+
+.metricLabel {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+}
+
+.metricValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 200px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--space-2) var(--space-3) var(--space-2) 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-bg-input);
+  font-size: 13px;
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.clearSearch {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.clearSearch:hover {
+  background: var(--color-soft-beige);
+  color: var(--color-text-primary);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .metricsDisplay {
+    gap: var(--space-2);
+  }
+
+  .metricCard {
+    min-width: 60px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .actionBar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .leftSection,
+  .centerSection,
+  .rightSection {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .metricsDisplay {
+    gap: var(--space-2);
+  }
+
+  .searchBox {
+    width: 100%;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .actionBar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-3);
+    height: auto;
+  }
+
+  .leftSection,
+  .centerSection,
+  .rightSection {
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .viewModeToggle,
+  .actionButtons {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .metricsDisplay {
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .metricCard {
+    flex: 1;
+    min-width: 50px;
+  }
+
+  .searchBox {
+    max-width: 100%;
+  }
+}

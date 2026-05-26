@@ -1,0 +1,440 @@
+.tabsNav {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 2px solid var(--color-border-subtle);
+  margin-bottom: var(--space-6);
+}
+
+.tabLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.tabLink:hover {
+  color: var(--color-brown-dark);
+}
+
+.tabLinkActive {
+  color: var(--color-brown-dark);
+  border-bottom-color: var(--color-gold);
+}
+
+.tabContent {
+  min-height: 0;
+}
+
+/* Dashboard Metrics */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.statCard {
+  box-shadow: var(--shadow-sm);
+}
+
+.statHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.statCard h3 {
+  font-size: var(--text-2xl);
+  font-family: var(--font-sans);
+  color: var(--color-brown-dark);
+  margin: var(--space-1) 0;
+}
+
+.statCard p {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.greenText {
+  color: var(--stage-green-text);
+}
+.goldText {
+  color: var(--color-gold);
+}
+.blueText {
+  color: var(--stage-blue-text);
+}
+.purpleText {
+  color: var(--stage-purple-text);
+}
+
+/* Table */
+.broadcastTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.broadcastTable th,
+.broadcastTable td {
+  padding: var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+}
+
+.broadcastTable th {
+  background: var(--color-bg-sidebar);
+  color: var(--color-brown-dark);
+  font-weight: var(--weight-semibold);
+}
+
+/* WhatsApp Live Chat UI */
+.chatLayoutGrid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-4);
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 600px;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 800px) {
+  .chatLayoutGrid {
+    grid-template-columns: 1fr;
+    height: 520px;
+  }
+
+  /* Single-panel mobile view toggling */
+  .chatLayoutGrid.showListView .chatSidebar {
+    display: flex;
+    width: 100%;
+  }
+  .chatLayoutGrid.showListView .chatWindow {
+    display: none;
+  }
+
+  .chatLayoutGrid.showChatView .chatSidebar {
+    display: none;
+  }
+  .chatLayoutGrid.showChatView .chatWindow {
+    display: flex;
+    width: 100%;
+  }
+
+  .mobileBackBtn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: transparent;
+    border: none;
+    color: var(--color-gold);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    padding: var(--space-1) var(--space-2) var(--space-1) 0;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .mobileBackBtn:hover {
+    background: var(--color-soft-beige);
+    color: var(--color-brown-dark);
+  }
+}
+
+@media (min-width: 801px) {
+  .mobileBackBtn {
+    display: none !important;
+  }
+}
+
+/* Left Sidebar - Chat List */
+.chatSidebar {
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-sidebar);
+}
+
+.sidebarHeader {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-weight: var(--weight-semibold);
+  color: var(--color-brown-dark);
+}
+
+.studentList {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.studentItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  border: none;
+  transition: background var(--transition-fast);
+}
+
+.studentItem:hover {
+  background: var(--color-soft-beige);
+}
+
+.studentItemActive {
+  background: var(--color-gold-soft);
+}
+
+.avatarMock {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: #ffffff;
+  font-weight: var(--weight-bold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.studentDetails {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.studentNameRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.studentNameRow strong {
+  font-size: var(--text-sm);
+  color: var(--color-brown-dark);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.studentNameRow span {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.lastMsg {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.unreadBadge {
+  background: var(--color-gold);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: var(--weight-bold);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+/* Right Chat Box - Message panel */
+.chatWindow {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-warm-white);
+  background-image: radial-gradient(rgba(196, 165, 116, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.chatWindowHeader {
+  padding: var(--space-3) var(--space-4);
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.headerInfo h4 {
+  font-size: var(--text-base);
+  font-family: var(--font-sans);
+  font-weight: var(--weight-bold);
+}
+
+.headerInfo p {
+  font-size: var(--text-xs);
+  color: var(--stage-green-text);
+  font-weight: var(--weight-medium);
+}
+
+.chatLogBody {
+  flex-grow: 1;
+  padding: var(--space-4);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  scroll-behavior: smooth;
+}
+
+.bubbleRow {
+  display: flex;
+  width: 100%;
+}
+
+.bubbleIncoming {
+  justify-content: flex-start;
+}
+
+.bubbleOutgoing {
+  justify-content: flex-end;
+}
+
+.msgBubble {
+  max-width: 65%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  position: relative;
+}
+
+.bubbleIncoming .msgBubble {
+  background: #ffffff;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-top-left-radius: 0;
+}
+
+.bubbleOutgoing .msgBubble {
+  background: var(--color-gold-soft);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-gold-border);
+  border-top-right-radius: 0;
+}
+
+.msgTime {
+  display: block;
+  font-size: 9px;
+  color: var(--color-text-muted);
+  text-align: right;
+  margin-top: var(--space-1);
+}
+
+/* Chat Input controls */
+.chatInputArea {
+  padding: var(--space-3) var(--space-4);
+  background: #ffffff;
+  border-top: 1px solid var(--color-border);
+}
+
+.templateQuickChips {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.quickChip {
+  background: var(--color-bg-sidebar);
+  color: var(--color-muted-brown);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: var(--space-1) var(--space-3);
+  font-size: 11px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.quickChip:hover {
+  background: var(--color-soft-beige);
+  border-color: var(--color-gold);
+}
+
+.inputForm {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.chatTextInput {
+  flex-grow: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg-input);
+  outline: none;
+}
+
+.chatTextInput:focus {
+  border-color: var(--color-gold);
+}
+
+/* Broadcast form */
+.broadcastFormCard {
+  max-width: 600px;
+}
+
+.broadcastForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.formLabel span {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  background: var(--color-bg-input);
+  width: 100%;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  border-color: var(--color-gold);
+  outline: none;
+}

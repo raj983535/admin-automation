@@ -1,0 +1,430 @@
+.tabsNav {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 2px solid var(--color-border-subtle);
+  margin-bottom: var(--space-6);
+}
+
+.tabLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.tabLink:hover {
+  color: var(--color-brown-dark);
+}
+
+.tabLinkActive {
+  color: var(--color-brown-dark);
+  border-bottom-color: var(--color-gold);
+}
+
+.tabContent {
+  min-height: 0;
+}
+
+/* Dashboard Styles */
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.statBox {
+  box-shadow: var(--shadow-sm);
+}
+
+.statHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.statHeader span {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.statBox h3 {
+  font-size: var(--text-2xl);
+  font-family: var(--font-sans);
+  color: var(--color-brown-dark);
+  margin: var(--space-1) 0;
+}
+
+.statBox p {
+  font-size: 10px;
+  color: var(--color-text-muted);
+}
+
+.greenText {
+  color: var(--stage-green-text);
+}
+
+.goldText {
+  color: var(--color-gold);
+}
+
+.blueText {
+  color: var(--stage-blue-text);
+}
+
+.orangeText {
+  color: var(--stage-orange-text);
+}
+
+.dashboardLayoutSplit {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .dashboardLayoutSplit {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gaugeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.progressRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+}
+
+.progressBarBg {
+  background: var(--color-bg-sidebar);
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  background: var(--color-gold);
+  height: 100%;
+  border-radius: 3px;
+}
+
+.chartColLeft {
+  min-width: 0;
+}
+
+.chartColRight {
+  min-width: 0;
+}
+
+.recentCampaignsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recentCampaignsTable th,
+.recentCampaignsTable td {
+  padding: var(--space-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+}
+
+.recentCampaignsTable th {
+  font-weight: var(--weight-semibold);
+  color: var(--color-brown-dark);
+  background: var(--color-bg-sidebar);
+}
+
+.recentCampaignsTable tr:hover {
+  background: var(--color-border-subtle);
+}
+
+/* Campaign Creator styles */
+.launcherColumns {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-6);
+}
+
+@media (max-width: 900px) {
+  .launcherColumns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.launcherForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.formLabel span {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2);
+  background: var(--color-bg-input);
+  color: var(--color-text-primary);
+  width: 100%;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+  border-color: var(--color-gold);
+  outline: none;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* Template buttons card selector */
+.templateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.templateBtn {
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.templateBtn:hover {
+  border-color: var(--color-gold);
+  background: var(--color-border-subtle);
+}
+
+.templateBtnActive {
+  border-color: var(--color-gold);
+  background: var(--color-gold-soft);
+  box-shadow: 0 0 0 1px var(--color-gold);
+}
+
+.templateBtn h4 {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-1);
+}
+
+.templateBtn p {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+/* Live Email Mockup Preview */
+.emailMockPreview {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+.emailHeaderBar {
+  background: var(--color-bg-sidebar);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.emailHeaderRow {
+  display: flex;
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.emailHeaderRow strong {
+  color: var(--color-brown-dark);
+  margin-right: var(--space-1);
+}
+
+.emailSubjectLine {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--color-brown-dark);
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.emailContentBody {
+  padding: var(--space-4);
+  background: #ffffff;
+  overflow-y: auto;
+  flex-grow: 1;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-primary);
+}
+
+.emailBannerMock {
+  height: 100px;
+  background: var(--color-gold-soft);
+  border-bottom: 3px solid var(--color-gold);
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--color-brown-dark);
+  font-weight: var(--weight-bold);
+}
+
+.emailSignOffMock {
+  margin-top: var(--space-6);
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Scheduler Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(40, 30, 25, 0.6);
+  
+  z-index: var(--z-modal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border-top: 5px solid var(--color-gold);
+  width: 450px;
+  max-width: 90%;
+  padding: var(--space-5);
+  box-shadow: var(--shadow-lg);
+  animation: modalSlide 250ms ease-out;
+}
+
+@keyframes modalSlide {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalContent h3 {
+  font-size: var(--text-lg);
+  color: var(--color-brown-dark);
+  margin-bottom: var(--space-1);
+}
+
+.modalDesc {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+/* Cohort list styles */
+.cohortList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cohortRowItem {
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cohortMeta strong {
+  font-size: var(--text-base);
+  color: var(--color-brown-dark);
+  display: block;
+}
+
+.cohortMeta p {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+.cohortCountTag {
+  background: var(--color-soft-beige);
+  color: var(--color-muted-brown);
+  font-weight: var(--weight-bold);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}

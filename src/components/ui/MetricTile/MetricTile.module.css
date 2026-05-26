@@ -1,0 +1,54 @@
+.tile {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  width: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.clickable:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold-border);
+}
+
+.clickable:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.static {
+  cursor: default;
+}
+
+.label {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.value {
+  font-size: var(--text-lg);
+  color: var(--color-brown-dark);
+  font-weight: var(--weight-bold);
+  font-family: var(--font-sans);
+}
+
+.hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}

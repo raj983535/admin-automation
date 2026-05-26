@@ -1,0 +1,120 @@
+/* CollegeOS — Foundation Design Tokens */
+
+:root {
+  /* Primary palette */
+  --color-warm-white: #fdfcfa;
+  --color-ivory: #f8f6f0;
+  --color-soft-beige: #ede8df;
+  --color-muted-brown: #6b5e52;
+  --color-brown-dark: #4a4038;
+  --color-light-gray: #e8e6e2;
+  --color-gray-mid: #a39e96;
+  --color-gray-text: #7a736b;
+  --color-gold: #c4a574;
+  --color-gold-soft: rgba(196, 165, 116, 0.15);
+  --color-gold-border: rgba(196, 165, 116, 0.35);
+
+  /* Surfaces */
+  --color-bg-app: var(--color-warm-white);
+  --color-bg-sidebar: #f5f2eb;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #ffffff;
+  --color-bg-input: #faf9f6;
+  --color-border: #e5e1d9;
+  --color-border-subtle: #efece6;
+
+  /* Text */
+  --color-text-primary: #3d3832;
+  --color-text-secondary: var(--color-gray-text);
+  --color-text-muted: #a39e96;
+  --color-text-inverse: #fdfcfa;
+
+  /* Workflow stage colors (soft enterprise) */
+  --stage-blue-bg: #eef4fb;
+  --stage-blue-text: #3d6b9e;
+  --stage-blue-border: #c5d9ed;
+
+  --stage-purple-bg: #f3eff9;
+  --stage-purple-text: #6b4f8a;
+  --stage-purple-border: #d4c5e8;
+
+  --stage-orange-bg: #faf3eb;
+  --stage-orange-text: #a66b3d;
+  --stage-orange-border: #e8d4c0;
+
+  --stage-yellow-bg: #faf8eb;
+  --stage-yellow-text: #8a7a3d;
+  --stage-yellow-border: #e8e0c0;
+
+  --stage-green-bg: #eef6f0;
+  --stage-green-text: #3d7a52;
+  --stage-green-border: #c0dcc8;
+
+  --stage-gray-bg: #f4f3f1;
+  --stage-gray-text: #6b6560;
+  --stage-gray-border: #ddd9d4;
+
+  --stage-red-bg: #fcf0f0;
+  --stage-red-text: #a84242;
+  --stage-red-border: #ebcccc;
+
+  /* Typography */
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.75rem;
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --navbar-height: 64px;
+  --page-max-width: 1400px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(74, 64, 56, 0.04);
+  --shadow-sm: 0 2px 8px rgba(74, 64, 56, 0.06), 0 1px 2px rgba(74, 64, 56, 0.04);
+  --shadow-md: 0 4px 16px rgba(74, 64, 56, 0.08), 0 2px 4px rgba(74, 64, 56, 0.04);
+  --shadow-lg: 0 8px 32px rgba(74, 64, 56, 0.1), 0 4px 8px rgba(74, 64, 56, 0.05);
+  --shadow-card: var(--shadow-sm);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+
+  /* Z-index */
+  --z-sidebar: 100;
+  --z-navbar: 110;
+  --z-dropdown: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+}

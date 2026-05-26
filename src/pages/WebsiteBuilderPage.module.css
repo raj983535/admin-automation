@@ -1,0 +1,34 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--navbar-height));
+  background: var(--color-bg-app);
+  overflow: hidden;
+}
+
+.builderContainer {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .builderContainer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    height: auto;
+    min-height: calc(100vh - var(--navbar-height));
+  }
+
+  .builderContainer {
+    flex-direction: column;
+    overflow: visible;
+  }
+}

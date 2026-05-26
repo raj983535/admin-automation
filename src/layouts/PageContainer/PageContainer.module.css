@@ -1,0 +1,33 @@
+.main {
+  flex: 1;
+  padding: var(--space-6) var(--space-8);
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.default {
+  max-width: var(--page-max-width);
+}
+
+.wide {
+  max-width: 1600px;
+}
+
+.full {
+  max-width: none;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: var(--space-4) var(--space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: var(--space-3) var(--space-2);
+  }
+}

@@ -1,0 +1,496 @@
+.headerBar {
+  margin-bottom: var(--space-4);
+}
+
+.headerTitle {
+  margin: 0;
+  font-family: var(--font-serif);
+  color: var(--color-brown-dark);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+}
+
+.headerSubtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+}
+
+/* Finance KPI Cards */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.financeKpiCard {
+  background: var(--color-bg-card, #ffffff);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: box-shadow var(--transition-fast) ease, border-color var(--transition-fast) ease;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+.financeKpiCard:hover {
+  box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.05));
+  border-color: var(--color-gold-border);
+}
+
+.financeKpiCard:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.kpiHeaderIconRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpiHeaderIconRow span {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.iconCircle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.financeKpiCard strong {
+  font-size: var(--text-xl);
+  color: var(--color-brown-dark);
+  font-weight: var(--weight-bold);
+  font-family: var(--font-sans);
+}
+
+.trendRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* Split Layout */
+.financeSplitGrid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .financeSplitGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.invoicesCard {
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+}
+
+.sidebarSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--font-serif);
+  color: var(--color-brown-dark);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+}
+
+.sectionSubtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+}
+
+.tableHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-3);
+}
+
+.tableControls {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 8px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.searchInput {
+  padding: 6px var(--space-3) 6px 26px;
+  font-size: 11px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-input, #fafafa);
+  width: 160px;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.searchInput:focus {
+  border-color: var(--color-gold);
+  background: #ffffff;
+  box-shadow: 0 0 0 2px var(--color-gold-soft);
+}
+
+.filterWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filterIcon {
+  position: absolute;
+  left: 8px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.statusSelect {
+  padding: 6px var(--space-3) 6px 26px;
+  font-size: 11px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-card, #ffffff);
+  color: var(--color-brown-dark);
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.statusSelect:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px var(--color-gold-soft);
+}
+
+/* Invoices Table styling */
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.invoiceTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.invoiceTable th {
+  padding: var(--space-3) var(--space-4);
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-input, #fafafa);
+}
+
+.invoiceTable td {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.invoiceRow {
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.invoiceRow:hover {
+  background: var(--color-gold-soft, #faf6f0);
+}
+
+.rowActiveSelection td {
+  background: var(--color-gold-soft, #faf6f0);
+  border-bottom-color: var(--color-gold);
+}
+
+.idCol {
+  font-family: monospace;
+  font-weight: var(--weight-semibold);
+  color: var(--color-brown-dark);
+}
+
+.nameCol {
+  font-weight: var(--weight-semibold);
+  color: var(--color-brown-dark);
+}
+
+.emptyTableState {
+  text-align: center !important;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: var(--space-8) 0 !important;
+}
+
+/* Sidebar components */
+.refundsWorkflowCard {
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0,0,0,0.05));
+}
+
+.refundsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.emptyRefundState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) 0;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.checkIconSuccess {
+  color: var(--stage-green-text, #15803d);
+  margin-bottom: var(--space-2);
+}
+
+.emptyRefundState span {
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  max-width: 180px;
+}
+
+.refundRequestItem {
+  background: var(--color-bg-input, #fcfbfa);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: var(--transition-fast);
+}
+
+.refundRequestItem:hover {
+  border-color: var(--color-gold);
+  background: #ffffff;
+}
+
+.refundMetaHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.refundId {
+  font-family: monospace;
+  font-weight: var(--weight-bold);
+  color: var(--color-text-secondary);
+}
+
+.refundDate {
+  color: var(--color-text-muted);
+}
+
+.studentName {
+  font-size: var(--text-sm);
+  color: var(--color-brown-dark);
+  font-weight: var(--weight-bold);
+}
+
+.studentCourse {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+
+.refundReason {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  font-style: italic;
+  background: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 6px;
+  line-height: 1.4;
+}
+
+.refundAmountLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+  border-top: 1px dashed var(--color-border-subtle);
+  padding-top: var(--space-2);
+}
+
+.refundAmountLine strong {
+  color: var(--color-brown-dark);
+  font-size: var(--text-sm);
+}
+
+.refundActionsRow {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: 2px;
+}
+
+.refundDenyBtn, .refundApproveBtn {
+  flex: 1;
+  padding: 6px;
+  font-size: 11px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: var(--weight-bold);
+  transition: var(--transition-fast);
+}
+
+.refundDenyBtn {
+  background: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+}
+
+.refundDenyBtn:hover {
+  background: var(--color-bg-input);
+  color: var(--color-brown-dark);
+}
+
+.refundApproveBtn {
+  background: var(--color-gold-soft, #faf6f0);
+  border: 1px solid var(--color-gold);
+  color: var(--color-brown-dark);
+}
+
+.refundApproveBtn:hover {
+  background: var(--color-gold);
+  color: #ffffff;
+}
+
+/* Receipt breakdown panel */
+.invoiceDetailsPanel {
+  background: var(--color-gold-soft, #faf6f0);
+  border: 1px solid var(--color-gold-border, #e8dfd1);
+  animation: slideInSidebar 0.2s ease-out;
+}
+
+@keyframes slideInSidebar {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detailCloseBtn {
+  background: transparent;
+  border: none;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.receiptBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.receiptLine {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+}
+
+.receiptDivider {
+  border: none;
+  border-top: 1px dashed var(--color-gold-border);
+  margin: var(--space-1) 0;
+}
+
+.receiptStatusRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-2);
+  border-top: 1px solid var(--color-gold-border);
+  padding-top: var(--space-2);
+}
+
+.receiptStatusRow span {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-semibold);
+}
+
+.noPadding {
+  padding: 0 !important;
+}
+/* Layout: tablets & phones */
+@media (max-width: 768px) {
+  .headerBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headerTitle {
+    font-size: var(--text-xl);
+  }
+
+  .filtersBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchBox {
+    max-width: none;
+    flex: 1 1 100%;
+  }
+
+  .sourceSelectorGroup {
+    width: 100%;
+  }
+}

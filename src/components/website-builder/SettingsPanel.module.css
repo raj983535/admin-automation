@@ -1,0 +1,195 @@
+.settingsPanel {
+  width: 280px;
+  background: var(--color-bg-card);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.panelTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.closeButton:hover {
+  background: var(--color-soft-beige);
+  color: var(--color-text-primary);
+}
+
+.panelContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: var(--color-ivory);
+  border-radius: var(--radius-sm);
+}
+
+.sectionType {
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-gold-soft);
+  color: var(--color-brown-dark);
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+}
+
+.sectionId {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+}
+
+.settingsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.settingsGroupTitle {
+  margin: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.fieldLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+.fieldHint {
+  margin: 0;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-style: italic;
+}
+
+.fieldInput,
+.fieldTextarea {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-input);
+  font-size: var(--text-xs);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  transition: border-color var(--transition-fast);
+}
+
+.fieldInput:focus,
+.fieldTextarea:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.fieldInput::placeholder,
+.fieldTextarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.fieldTextarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.panelFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .settingsPanel {
+    width: 260px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .settingsPanel {
+    width: 240px;
+  }
+
+  .panelContent {
+    padding: var(--space-2);
+  }
+}
+
+@media (max-width: 768px) {
+  .settingsPanel {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .panelHeader {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .panelFooter {
+    padding: var(--space-2) var(--space-3);
+  }
+}
