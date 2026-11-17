@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Heart,
   MessageSquare,
@@ -78,6 +78,36 @@ export function CommunityPage() {
       likes: 18,
       commentsCount: 4,
       flagged: false
+    },
+    {
+      id: 'PST-005',
+      author: 'Priya Pillai (4th Year)',
+      group: 'Coding Club',
+      time: '4 hours ago',
+      content: 'Just finished a 6-hour competitive programming marathon! Solved 14 out of 18 problems on Codeforces Div 2. Anyone else prepping for ICPC regionals this December?',
+      likes: 31,
+      commentsCount: 11,
+      flagged: false
+    },
+    {
+      id: 'PST-006',
+      author: 'Arjun Singhal (2nd Year)',
+      group: 'Entrepreneurship Cell',
+      time: '5 hours ago',
+      content: 'Our startup pitch "GreenRoute" won 2nd place at the IIT-Delhi E-Summit! Thanks to the E-Cell mentors for the mock pitch sessions. Presentation slides available on the shared drive.',
+      likes: 55,
+      commentsCount: 18,
+      flagged: false
+    },
+    {
+      id: 'PST-007',
+      author: 'Dr. Sarah Jenkins (Faculty)',
+      group: 'General',
+      time: '6 hours ago',
+      content: 'Reminder: Deep Learning project proposals are due by Friday 5 PM. Teams of 3-4 students. Topics include GANs, transformers, or reinforcement learning agents. Office hours available Thursday 2-4 PM.',
+      likes: 38,
+      commentsCount: 7,
+      flagged: false
     }
   ]);
 
@@ -86,7 +116,10 @@ export function CommunityPage() {
     { id: 'robotics', name: 'Robotics Society', membersCount: 180 },
     { id: 'placements', name: 'Placement Cell', membersCount: 420 },
     { id: 'sports', name: 'Sports Council', membersCount: 220 },
-    { id: 'arts', name: 'Fine Arts Club', membersCount: 110 }
+    { id: 'arts', name: 'Fine Arts Club', membersCount: 110 },
+    { id: 'coding', name: 'Coding Club', membersCount: 310 },
+    { id: 'literary', name: 'Literary Society', membersCount: 95 },
+    { id: 'ecell', name: 'Entrepreneurship Cell', membersCount: 175 }
   ]);
 
   // Feed Publisher inputs
@@ -254,6 +287,8 @@ export function CommunityPage() {
                       <option value="Robotics Society">Robotics Society</option>
                       <option value="Placement Cell">Placement Cell</option>
                       <option value="Sports Council">Sports Council</option>
+                      <option value="Coding Club">Coding Club</option>
+                      <option value="Entrepreneurship Cell">Entrepreneurship Cell</option>
                     </select>
                   </label>
 

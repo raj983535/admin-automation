@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useMetricClick } from '../hooks/useMetricClick';
 import {
   Users,

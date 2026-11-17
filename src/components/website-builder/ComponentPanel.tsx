@@ -1,4 +1,5 @@
 import { useState, useMemo, memo } from 'react';
+import type { LucideIcon } from 'lucide-react';
 import { 
   Layout, 
   Square, 
@@ -10,13 +11,12 @@ import {
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
+import type { WebsiteSectionType } from '../../types/builder.types';
 import styles from './ComponentPanel.module.css';
 
-type SectionType = 'hero' | 'features' | 'about' | 'programs' | 'testimonials' | 'contact' | 'footer';
-
 interface Component {
-  type: SectionType;
-  icon: any;
+  type: WebsiteSectionType;
+  icon: LucideIcon;
   label: string;
   description: string;
   category: 'layout' | 'content' | 'media' | 'interactive';
@@ -83,7 +83,7 @@ const categories = [
 ];
 
 interface ComponentPanelProps {
-  onAddSection: (type: SectionType) => void;
+  onAddSection: (type: WebsiteSectionType) => void;
   searchQuery: string;
 }
 

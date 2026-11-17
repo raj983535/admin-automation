@@ -105,5 +105,63 @@ export const INITIAL_LEADS: StudentLead[] = [
     timeline: [
       { id: 't6-1', type: 'system', title: 'Marked Inactive', time: 'Yesterday', notes: 'Auto-routed to passive email campaign trigger.' }
     ]
+  },
+  {
+    id: 'lead-7',
+    name: 'Riya Nair',
+    email: 'riya.nair@gmail.com',
+    phone: '+91 94455 66778',
+    city: 'Kochi',
+    degreeTarget: 'B.Tech IT',
+    stage: 'Counselling Scheduled',
+    source: 'Google Search',
+    counsellor: 'Swati Sen',
+    tags: ['KEAM Qualified', 'Hostel Required'],
+    notes: ['Interested in AI specialization track. Parents attending counselling session.'],
+    reminderDate: '2026-05-26',
+    reminderChecked: false,
+    timeline: [
+      { id: 't7-1', type: 'system', title: 'Lead Ingested', time: '4 days ago', notes: 'Origin: Google Ads Search (B.Tech IT Campaign).' },
+      { id: 't7-2', type: 'communication', title: 'Outbound Email Sent', time: '3 days ago', notes: 'Sent B.Tech IT curriculum brochure and lab facility catalog.' },
+      { id: 't7-3', type: 'counsellor', title: 'Counselling Session Booked', time: '2 days ago', notes: 'Virtual counselling slot confirmed for May 26, 11:00 AM.' }
+    ]
+  },
+  {
+    id: 'lead-8',
+    name: 'Devendra Yadav',
+    email: 'devendra.yadav@outlook.com',
+    phone: '+91 88990 11223',
+    city: 'Jaipur',
+    degreeTarget: 'MBA Marketing',
+    stage: 'Documents Pending',
+    source: 'Referral',
+    counsellor: 'Dr. Sarah Jenkins',
+    tags: ['Work Ex', 'Digital Marketing Background'],
+    notes: ['3 years at a Jaipur-based e-commerce startup. Awaiting employer experience letter and MAT scorecard.'],
+    reminderDate: '2026-05-27',
+    reminderChecked: false,
+    timeline: [
+      { id: 't8-1', type: 'system', title: 'Lead Ingested', time: '6 days ago', notes: 'Origin: Alumni Referral (Sneha Kapoor, Class of 2019).' },
+      { id: 't8-2', type: 'counsellor', title: 'Telephonic Interview Completed', time: '4 days ago', notes: 'Strong communication skills. Recommended for fast-track admission.' },
+      { id: 't8-3', type: 'system', title: 'Document Checklist Generated', time: '3 days ago', notes: 'Pending: MAT Scorecard, Work Experience Letter, Passport-size Photo.' }
+    ]
+  },
+  {
+    id: 'lead-9',
+    name: 'Meghna Bose',
+    email: 'meghna.bose@gmail.com',
+    phone: '+91 97711 33445',
+    city: 'Hyderabad',
+    degreeTarget: 'B.Tech Biotechnology',
+    stage: 'Admission Confirmed',
+    source: 'Meta Ads',
+    counsellor: 'Swati Sen',
+    tags: ['NEET Qualified', 'Fee Paid', 'Hostel Booked'],
+    notes: ['Secured 96.2 percentile in NEET. Full tuition deposit and hostel booking completed. Ref: TXN-112847.'],
+    timeline: [
+      { id: 't9-1', type: 'system', title: 'Lead Ingested', time: '8 days ago', notes: 'Origin: Facebook Lead Form (Biotechnology Awareness Campaign).' },
+      { id: 't9-2', type: 'counsellor', title: 'Campus Visit Completed', time: '5 days ago', notes: 'Toured Biotech labs and research wing. Very enthusiastic.' },
+      { id: 't9-3', type: 'system', title: 'Seat Locked', time: '3 days ago', notes: 'Tuition deposit of Rs 1,20,000 reconciled. Hostel Block-C allotted.' }
+    ]
   }
 ];

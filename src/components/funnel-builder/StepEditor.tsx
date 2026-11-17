@@ -1,19 +1,8 @@
 import { memo, useCallback } from 'react';
 import { X, Settings } from 'lucide-react';
 import { Button } from '../ui/Button';
+import type { FunnelStep, FunnelStepContent } from '../../types/builder.types';
 import styles from './StepEditor.module.css';
-
-type FunnelStep = {
-  id: string;
-  name: string;
-  type: 'landing' | 'inquiry' | 'application' | 'review' | 'payment' | 'confirmation';
-  color: string;
-  conversionRate: number;
-  dropOffRate: number;
-  visitors: number;
-  conversions: number;
-  content: any;
-};
 
 interface StepEditorProps {
   step: FunnelStep;
@@ -22,14 +11,16 @@ interface StepEditorProps {
 }
 
 function StepEditorComponent({ step, onUpdate, onClose }: StepEditorProps) {
-  const handleContentChange = useCallback((key: string, value: any) => {
+  const handleContentChange = useCallback(<K extends keyof FunnelStepContent>(key: K, value: FunnelStepContent[K]) => {
     onUpdate(step.id, {
-      ...step.content,
-      [key]: value
+      content: {
+        ...step.content,
+        [key]: value,
+      }
     });
   }, [step.id, step.content, onUpdate]);
 
-  const handleStepChange = useCallback((key: string, value: any) => {
+  const handleStepChange = useCallback(<K extends keyof FunnelStep>(key: K, value: FunnelStep[K]) => {
     onUpdate(step.id, { [key]: value });
   }, [step.id, onUpdate]);
 
@@ -178,7 +169,7 @@ function StepEditorComponent({ step, onUpdate, onClose }: StepEditorProps) {
         <Button variant="secondary" size="sm" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" size="sm" onClick={() => console.log('Changes saved')}>
+        <Button variant="primary" size="sm" onClick={onClose}>
           Save Changes
         </Button>
       </div>

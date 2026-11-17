@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { PageContainer, ModulePageHeader } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   MessageCircle,
   Send,
@@ -89,7 +89,15 @@ interface BroadcastCampaign {
 const INITIAL_BROADCASTS: BroadcastCampaign[] = [
   { id: 'wb-1', name: 'CS Orientation Checklist Nudge', templateName: 'Freshman Orientation Guide', cohort: 'B.Tech CS Applicants', sentCount: 450, readRate: 94.2, repliedRate: 48.1, status: 'Sent', date: '2026-05-18' },
   { id: 'wb-2', name: 'MBA Reference Form Blast', templateName: 'Reference Letter Link', cohort: 'Executive MBA Fall', sentCount: 120, readRate: 88.5, repliedRate: 62.4, status: 'Sent', date: '2026-05-20' },
+  { id: 'wb-3', name: 'Scholarship Portal Link Blast', templateName: 'Portal Link', cohort: 'B.Tech CS Applicants', sentCount: 450, readRate: 91.7, repliedRate: 39.8, status: 'Sent', date: '2026-05-22' },
+  { id: 'wb-4', name: 'Hostel Allotment Notification', templateName: 'Freshman Orientation Guide', cohort: 'B.Tech CS Applicants', sentCount: 450, readRate: 0, repliedRate: 0, status: 'Scheduled', date: '2026-05-28' },
+  { id: 'wb-5', name: 'Fee Payment Deadline Reminder', templateName: 'Fee Reminder', cohort: 'Executive MBA Fall', sentCount: 120, readRate: 96.3, repliedRate: 71.2, status: 'Sent', date: '2026-05-23' },
 ];
+
+let whatsappMessageIdCounter = 100;
+let broadcastIdCounter = INITIAL_BROADCASTS.length + 1;
+const createWhatsappMessageId = () => `msg-demo-${whatsappMessageIdCounter++}`;
+const createBroadcastId = () => `wb-demo-${broadcastIdCounter++}`;
 
 export function WhatsappSenderPage() {
   const { notify } = useNotifications();
@@ -131,14 +139,13 @@ export function WhatsappSenderPage() {
     return chats.find((c) => c.id === selectedChatId) || chats[0];
   }, [chats, selectedChatId]);
 
-  // Mark Active Chat as Read
-  useEffect(() => {
-    if (activeChat && activeChat.unreadCount > 0) {
-      setChats(prev =>
-        prev.map(c => (c.id === activeChat.id ? { ...c, unreadCount: 0 } : c))
-      );
-    }
-  }, [selectedChatId]);
+  const handleSelectChat = (chatId: string) => {
+    setSelectedChatId(chatId);
+    setActiveMobileView('chat');
+    setChats(prev =>
+      prev.map(c => (c.id === chatId ? { ...c, unreadCount: 0 } : c))
+    );
+  };
 
   // Send Message in Active Conversation
   const handleSendMessage = (e: React.FormEvent) => {
@@ -146,7 +153,7 @@ export function WhatsappSenderPage() {
     if (!chatInputText.trim()) return;
 
     const newMsg: Message = {
-      id: `msg-${Date.now()}`,
+      id: createWhatsappMessageId(),
       sender: 'admin',
       text: chatInputText.trim(),
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -170,7 +177,7 @@ export function WhatsappSenderPage() {
     // Trigger instant mock student response after 1.5 seconds!
     setTimeout(() => {
       const studentReply: Message = {
-        id: `msg-${Date.now() + 1}`,
+        id: createWhatsappMessageId(),
         sender: 'student',
         text: 'Thanks for the quick response. I appreciate your assistance!',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -215,7 +222,7 @@ export function WhatsappSenderPage() {
     const templateLabel = templateObj ? templateObj.label : 'Admissions Portal Link';
 
     const newBroadcast: BroadcastCampaign = {
-      id: `wb-${Date.now()}`,
+      id: createBroadcastId(),
       name: broadcastName.trim(),
       templateName: templateLabel,
       cohort: selectedCohort,
@@ -285,8 +292,7 @@ export function WhatsappSenderPage() {
                     <button type="button"
                       key={c.id}
                       onClick={() => {
-                        setSelectedChatId(c.id);
-                        setActiveMobileView('chat');
+                        handleSelectChat(c.id);
                       }}
                       className={`${styles.studentItem} ${isActive ? styles.studentItemActive : ''}`}
                     >

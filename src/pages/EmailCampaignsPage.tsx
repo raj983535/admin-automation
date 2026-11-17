@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer, ModulePageHeader } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Mail,
   Send,
@@ -66,7 +66,13 @@ const INITIAL_CAMPAIGNS: Campaign[] = [
   { id: 'ec-1', name: 'Engineering Admissions Welcome Blast', subject: 'Welcome to CollegeOS University! Admission Approved', cohort: 'B.Tech Admitted List', sentCount: 1520, openRate: 68.4, clickRate: 42.1, status: 'Sent', date: '2026-05-18' },
   { id: 'ec-2', name: 'Scholarship RSVP Nudge', subject: 'Invitation: CollegeOS Campus Open House & Lab Tour', cohort: 'Inquiry Cohort', sentCount: 840, openRate: 52.1, clickRate: 18.9, status: 'Sent', date: '2026-05-20' },
   { id: 'ec-3', name: 'Overdue Transcripts Alert', subject: 'Action Required: Missing Admission Documents', cohort: 'Incomplete Dossiers', sentCount: 180, openRate: 0, clickRate: 0, status: 'Scheduled', date: '2026-05-25' },
+  { id: 'ec-4', name: 'Scholarship Application Deadline', subject: 'Last Date: Merit Scholarship Applications Close Friday', cohort: 'Scholarship Applicants', sentCount: 680, openRate: 74.8, clickRate: 51.3, status: 'Sent', date: '2026-05-16' },
+  { id: 'ec-5', name: 'Faculty Meet & Greet Invite', subject: 'You\'re Invited: Meet Your Department Faculty This Saturday', cohort: 'B.Tech Admitted List', sentCount: 1520, openRate: 61.2, clickRate: 38.7, status: 'Sent', date: '2026-05-21' },
+  { id: 'ec-6', name: 'Hostel Room Allocation Notice', subject: 'Important: Hostel Allotment Window Opens Monday', cohort: 'B.Tech Admitted List', sentCount: 1520, openRate: 0, clickRate: 0, status: 'Scheduled', date: '2026-05-28' },
 ];
+
+let campaignIdCounter = INITIAL_CAMPAIGNS.length + 1;
+const createCampaignId = () => `ec-demo-${campaignIdCounter++}`;
 
 export function EmailCampaignsPage() {
   const { notify } = useNotifications();
@@ -120,7 +126,7 @@ export function EmailCampaignsPage() {
     const count = cohortData ? cohortData.count : 500;
 
     const newCampaign: Campaign = {
-      id: `ec-${Date.now()}`,
+      id: createCampaignId(),
       name: campaignNameInput.trim(),
       subject: subjectInput.trim(),
       cohort: cohortSelect,
@@ -159,7 +165,7 @@ export function EmailCampaignsPage() {
     const count = cohortData ? cohortData.count : 500;
 
     const newCampaign: Campaign = {
-      id: `ec-${Date.now()}`,
+      id: createCampaignId(),
       name: campaignNameInput.trim(),
       subject: subjectInput.trim(),
       cohort: cohortSelect,
@@ -184,9 +190,7 @@ export function EmailCampaignsPage() {
 
   // Dynamic Preview Rendering
   const renderedPreviewBody = useMemo(() => {
-    return bodyInput
-      .replace(/{first_name}/g, 'Aditya')
-      .replace(/\n/g, '<br/>');
+    return bodyInput.replace(/{first_name}/g, 'Aditya');
   }, [bodyInput]);
 
   return (
@@ -473,7 +477,9 @@ export function EmailCampaignsPage() {
                         <div className={styles.emailBannerMock}>
                           CollegeOS University
                         </div>
-                        <div dangerouslySetInnerHTML={{ __html: renderedPreviewBody || 'Type in body editor to preview...' }} />
+                        <div style={{ whiteSpace: 'pre-wrap' }}>
+                          {renderedPreviewBody || 'Type in body editor to preview...'}
+                        </div>
                         <div className={styles.emailSignOffMock}>
                           Disclaimer: You are receiving this official enrollment email because you submitted an inquiry or application to CollegeOS.
                           <br />

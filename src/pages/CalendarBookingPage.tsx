@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useMetricClick } from '../hooks/useMetricClick';
 import {
   Calendar as CalendarIcon,
@@ -37,13 +37,17 @@ const INITIAL_APPOINTMENTS: Appointment[] = [
   { id: 'APP-102', studentName: 'Kabir Malhotra', course: 'MBA Marketing', counsellor: 'Dr. Sarah Jenkins', date: 22, time: '11:30 AM', status: 'scheduled', notes: 'Wants scholarship verification check details.' },
   { id: 'APP-103', studentName: 'Meera Deshmukh', course: 'B.Tech Biotechnology', counsellor: 'Swati Sen', date: 23, time: '02:00 PM', status: 'completed', notes: 'Alumni referral background reviewed.' },
   { id: 'APP-104', studentName: 'Rohan Verma', course: 'MBA Finance', counsellor: 'Dr. Sarah Jenkins', date: 26, time: '03:30 PM', status: 'scheduled', notes: 'Documents verification query resolution.' },
-  { id: 'APP-105', studentName: 'Arjun Singhal', course: 'B.Tech IT', counsellor: 'Amit Kulkarni', date: 22, time: '09:30 AM', status: 'cancelled', notes: 'Candidate rescheduled callback window.' }
+  { id: 'APP-105', studentName: 'Arjun Singhal', course: 'B.Tech IT', counsellor: 'Amit Kulkarni', date: 22, time: '09:30 AM', status: 'cancelled', notes: 'Candidate rescheduled callback window.' },
+  { id: 'APP-106', studentName: 'Priya Pillai', course: 'B.Tech CSE', counsellor: 'Swati Sen', date: 25, time: '11:30 AM', status: 'scheduled', notes: 'Lateral entry eligibility from diploma — needs CSET guidance and credit transfer discussion.' },
+  { id: 'APP-107', studentName: 'Sahil Sharma', course: 'B.Tech CSE', counsellor: 'Amit Kulkarni', date: 27, time: '09:00 AM', status: 'scheduled', notes: 'AI/ML specialization track selection and hostel booking confirmation.' },
+  { id: 'APP-108', studentName: 'Sneha Rao', course: 'B.Tech Biotechnology', counsellor: 'Dr. Sarah Jenkins', date: 28, time: '04:30 PM', status: 'completed', notes: 'State board topper scholarship eligibility reviewed and confirmed at 50% waiver.' }
 ];
 
 const COUNSELLORS: CounsellorAvailability[] = [
   { name: 'Swati Sen', specialization: 'Engineering Sector', status: 'Slots Open', slotsAvailable: 3 },
   { name: 'Dr. Sarah Jenkins', specialization: 'Management Sector', status: 'Active', slotsAvailable: 1 },
-  { name: 'Amit Kulkarni', specialization: 'Biotech & General Science', status: 'Fully Booked', slotsAvailable: 0 }
+  { name: 'Amit Kulkarni', specialization: 'Biotech & General Science', status: 'Fully Booked', slotsAvailable: 0 },
+  { name: 'Prof. Rajan Nair', specialization: 'Financial Aid & Scholarships', status: 'Slots Open', slotsAvailable: 4 }
 ];
 
 export function CalendarBookingPage() {

@@ -1,5 +1,6 @@
 import { CheckCircle, Info, AlertTriangle, XCircle, X } from 'lucide-react';
-import { useNotifications, type NotificationType } from '../../../contexts/NotificationContext';
+import { useNotifications } from '../../../hooks/useNotifications';
+import type { NotificationType } from '../../../contexts/NotificationContext';
 import styles from './Notification.module.css';
 
 const icons: Record<NotificationType, typeof Info> = {

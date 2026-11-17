@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useMetricClick } from '../hooks/useMetricClick';
 import {
   HeartPulse,
@@ -167,6 +167,63 @@ const INITIAL_PATIENTS: PatientRecord[] = [
     timeline: [
       { id: 'LOG-601', title: 'Case Formally Archived', content: 'Cough resolved. 5-day course of expectorant completed.', time: '5 days ago', type: 'clearance' },
       { id: 'LOG-602', title: 'Rx Dispensed', content: 'Dextromethorphan syrup - 10ml thrice daily.', time: '10 days ago', type: 'prescription' },
+    ],
+  },
+  {
+    patientId: 'PAT-2023-11',
+    name: 'Rohan Verma',
+    age: 21,
+    gender: 'Male',
+    branch: 'Electronics',
+    symptoms: 'Lower Back Strain (Gym Injury)',
+    vitals: {
+      bp: '124/80 mmHg',
+      temp: '98.4°F',
+      pulse: 74,
+    },
+    status: 'scheduled',
+    doctor: 'Dr. Sunil Rao',
+    timeline: [
+      { id: 'LOG-701', title: 'Ortho Consultation Booked', content: 'Scheduled for MRI evaluation with Dr. Sunil Rao.', time: '1 hour ago', type: 'checkin' },
+      { id: 'LOG-702', title: 'Triage Check-in', content: 'Reported acute lumbar pain after heavy deadlift session. Ice pack administered.', time: '3 hours ago', type: 'triage' },
+    ],
+  },
+  {
+    patientId: 'PAT-2024-28',
+    name: 'Sneha Rao',
+    age: 20,
+    gender: 'Female',
+    branch: 'Computer Science',
+    symptoms: 'Iron Deficiency Anemia — Fatigue & Pallor',
+    vitals: {
+      bp: '108/65 mmHg',
+      temp: '97.8°F',
+      pulse: 88,
+    },
+    status: 'pending',
+    doctor: 'Dr. Anjali Mehta',
+    timeline: [
+      { id: 'LOG-801', title: 'Lab Work Ordered', content: 'CBC and serum ferritin levels requested. Results pending from pathology.', time: '45 mins ago', type: 'triage' },
+      { id: 'LOG-802', title: 'Triage Admission', content: 'Presented with chronic fatigue, dizziness, and visible pallor. Haemoglobin suspected low.', time: '2 hours ago', type: 'triage' },
+    ],
+  },
+  {
+    patientId: 'PAT-2025-51',
+    name: 'Vikram Joshi',
+    age: 19,
+    gender: 'Male',
+    branch: 'Information Tech',
+    symptoms: 'Post-Dengue Recovery Monitoring',
+    vitals: {
+      bp: '116/74 mmHg',
+      temp: '98.2°F',
+      pulse: 70,
+    },
+    status: 'healthy',
+    doctor: 'Dr. Vikram Seth',
+    timeline: [
+      { id: 'LOG-901', title: 'Recovery Cleared', content: 'Platelet count restored to 1.8L. Cleared for regular academic schedule.', time: '1 day ago', type: 'clearance' },
+      { id: 'LOG-902', title: 'Follow-Up Visit', content: 'Platelet trending upward at 1.5L. Advised continued hydration and rest.', time: '3 days ago', type: 'checkin' },
     ],
   },
 ];

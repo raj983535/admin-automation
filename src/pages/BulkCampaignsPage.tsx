@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PageContainer, ModulePageHeader } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Send,
   Mail,
@@ -50,6 +50,33 @@ const INITIAL_BULK_CAMPAIGNS: BulkCampaign[] = [
     stats: { sent: 240, deliveryRate: 0, conversionRate: 0 },
     status: 'Scheduled',
     date: '2026-05-26',
+  },
+  {
+    id: 'bc-4',
+    name: 'Scholarship Deadline Omni-blast',
+    cohort: 'Scholarship Applicants',
+    channels: { email: true, whatsapp: true, sms: true },
+    stats: { sent: 680, deliveryRate: 99.2, conversionRate: 54.8 },
+    status: 'Sent',
+    date: '2026-05-17',
+  },
+  {
+    id: 'bc-5',
+    name: 'MBA Pre-Admission Welcome Kit',
+    cohort: 'Inquiry Cohort',
+    channels: { email: true, whatsapp: true },
+    stats: { sent: 4850, deliveryRate: 97.6, conversionRate: 33.1 },
+    status: 'Sent',
+    date: '2026-05-21',
+  },
+  {
+    id: 'bc-6',
+    name: 'Fee Deposit Final Warning',
+    cohort: 'B.Tech Admitted List',
+    channels: { sms: true, whatsapp: true },
+    stats: { sent: 1520, deliveryRate: 0, conversionRate: 0 },
+    status: 'Scheduled',
+    date: '2026-05-29',
   },
 ];
 

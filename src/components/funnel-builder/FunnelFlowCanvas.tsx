@@ -8,19 +8,8 @@ import {
   ArrowDown
 } from 'lucide-react';
 import { Button } from '../ui/Button';
+import type { FunnelStep, FunnelStepType } from '../../types/builder.types';
 import styles from './FunnelFlowCanvas.module.css';
-
-type FunnelStep = {
-  id: string;
-  name: string;
-  type: 'landing' | 'inquiry' | 'application' | 'review' | 'payment' | 'confirmation';
-  color: string;
-  conversionRate: number;
-  dropOffRate: number;
-  visitors: number;
-  conversions: number;
-  content: any;
-};
 
 type ViewMode = 'flow' | 'editor' | 'analytics' | 'templates';
 
@@ -31,12 +20,12 @@ interface FunnelFlowCanvasProps {
   showAnalytics: boolean;
   searchQuery: string;
   onSelectStep: (id: string) => void;
-  onAddStep: (type: FunnelStep['type']) => void;
+  onAddStep: (type: FunnelStepType) => void;
   onDeleteStep: (id: string) => void;
   onReorder: (fromIndex: number, toIndex: number) => void;
 }
 
-const STEP_TYPES: { type: FunnelStep['type']; label: string; color: string }[] = [
+const STEP_TYPES: { type: FunnelStepType; label: string; color: string }[] = [
   { type: 'landing', label: 'Landing Page', color: '#D4A574' },
   { type: 'inquiry', label: 'Inquiry Form', color: '#C4956A' },
   { type: 'application', label: 'Application', color: '#B48560' },
@@ -185,7 +174,7 @@ function FunnelFlowCanvasComponent({
                   <div className={styles.flowArrow}>
                     <ArrowDown size={20} className={styles.arrowIcon} />
                     <span className={styles.flowRate}>
-                      {((step.conversions / step.visitors) * 100).toFixed(1)}%
+                      {(step.visitors > 0 ? (step.conversions / step.visitors) * 100 : 0).toFixed(1)}%
                     </span>
                   </div>
                 )}

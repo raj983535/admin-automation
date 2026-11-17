@@ -1,24 +1,22 @@
 import { useState, memo, useMemo } from 'react';
-import { 
-  GripVertical, 
-  Eye, 
-  EyeOff, 
-  Trash2, 
-  Edit3
+import {
+  GripVertical,
+  Eye,
+  EyeOff,
+  Trash2,
+  Edit3,
 } from 'lucide-react';
 import { Card } from '../ui/Card';
+import type {
+  FeatureItem,
+  PageSection,
+  ProgramItem,
+  TestimonialItem,
+} from '../../types/builder.types';
 import styles from './BuilderCanvas.module.css';
 
 type PreviewMode = 'desktop' | 'tablet' | 'mobile';
 type ViewMode = 'editor' | 'preview' | 'templates';
-
-interface PageSection {
-  id: string;
-  type: 'hero' | 'features' | 'about' | 'programs' | 'testimonials' | 'contact' | 'footer';
-  title: string;
-  content: any;
-  visible: boolean;
-}
 
 interface BuilderCanvasProps {
   sections: PageSection[];
@@ -39,7 +37,7 @@ function BuilderCanvasComponent({
   onSelectSection,
   onDeleteSection,
   onToggleVisibility,
-  onReorder
+  onReorder,
 }: BuilderCanvasProps) {
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
@@ -71,9 +69,9 @@ function BuilderCanvasComponent({
       case 'features':
         return (
           <div className={styles.featuresPreview}>
-            {section.content.items?.map((item: any, idx: number) => (
-              <div key={idx} className={styles.featureItem}>
-                <div className={styles.featureIcon}>★</div>
+            {(section.content.items || []).map((item: FeatureItem, idx: number) => (
+              <div key={`${item.title}-${idx}`} className={styles.featureItem}>
+                <div className={styles.featureIcon}>*</div>
                 <h4>{item.title}</h4>
                 <p>{item.description}</p>
               </div>
@@ -83,11 +81,53 @@ function BuilderCanvasComponent({
       case 'programs':
         return (
           <div className={styles.programsPreview}>
-            {section.content.programs?.map((prog: any, idx: number) => (
-              <div key={idx} className={styles.programItem}>
-                <h4>{prog.name}</h4>
+            {(section.content.programs || []).map((prog: ProgramItem, idx: number) => (
+              <div key={`${prog.name}-${idx}`} className={styles.programItem}>
+                <div>
+                  <h4>{prog.name}</h4>
+                  {prog.outcome && <p className={styles.programOutcome}>{prog.outcome}</p>}
+                </div>
                 <span className={styles.programDuration}>{prog.duration}</span>
               </div>
+            ))}
+          </div>
+        );
+      case 'about':
+        return (
+          <div className={styles.copyPreview}>
+            <h4>{section.content.headline || section.title}</h4>
+            <p>{section.content.body || 'Add an institution story and proof points.'}</p>
+          </div>
+        );
+      case 'testimonials':
+        return (
+          <div className={styles.testimonialPreview}>
+            {(section.content.testimonials || []).map((item: TestimonialItem, idx: number) => (
+              <div key={`${item.author}-${idx}`} className={styles.testimonialItem}>
+                <p>"{item.quote}"</p>
+                <strong>{item.author}</strong>
+                <span>{item.role}</span>
+              </div>
+            ))}
+          </div>
+        );
+      case 'contact':
+        return (
+          <div className={styles.copyPreview}>
+            <h4>{section.content.headline || 'Contact Admissions'}</h4>
+            <p>{section.content.body}</p>
+            <div className={styles.contactGrid}>
+              <span>{section.content.phone}</span>
+              <span>{section.content.email}</span>
+              <span>{section.content.address}</span>
+            </div>
+          </div>
+        );
+      case 'footer':
+        return (
+          <div className={styles.footerPreview}>
+            {(section.content.links || []).map((link) => (
+              <span key={link}>{link}</span>
             ))}
           </div>
         );
@@ -114,13 +154,13 @@ function BuilderCanvasComponent({
       </div>
 
       <div className={styles.canvasContent}>
-        <div 
+        <div
           className={styles.previewContainer}
           style={{ maxWidth: previewWidth }}
         >
           {sections.length === 0 ? (
             <div className={styles.emptyState}>
-              <div className={styles.emptyIcon}>📄</div>
+              <div className={styles.emptyIcon}>DOC</div>
               <h4>No sections yet</h4>
               <p>Add components from the left panel to start building your page</p>
             </div>
@@ -135,7 +175,7 @@ function BuilderCanvasComponent({
                 className={[
                   styles.sectionWrapper,
                   selectedSection === section.id ? styles.selected : '',
-                  !section.visible ? styles.hidden : ''
+                  !section.visible ? styles.hidden : '',
                 ].filter(Boolean).join(' ')}
               >
                 {viewMode === 'editor' && (

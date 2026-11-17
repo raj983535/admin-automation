@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { PageContainer } from '../layouts';
 import { Button, StageChip, MetricTile } from '../components/ui';
 import { useMetricClick } from '../hooks/useMetricClick';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Search,
   Plus,
@@ -29,6 +29,7 @@ interface TimelineEvent {
 import type { StudentLead } from '../types/crm.types';
 
 import { crmService } from '../services/crm.service';
+type LeadSource = 'Meta Ads' | 'Google Search' | 'Referral' | 'Direct Traffic';
 
 export function CrmPage() {
   const { notify } = useNotifications();
@@ -683,7 +684,7 @@ export function CrmPage() {
                   <span>Acquisition Source Channel</span>
                   <select
                     value={newLeadSource}
-                    onChange={e => setNewLeadSource(e.target.value as any)}
+                    onChange={e => setNewLeadSource(e.target.value as LeadSource)}
                     className={styles.modalSelect}
                   >
                     <option value="Meta Ads">Meta Ads</option>

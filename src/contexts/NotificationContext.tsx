@@ -1,11 +1,10 @@
 import {
-  createContext,
   useCallback,
-  useContext,
   useMemo,
   useState,
   type ReactNode,
 } from 'react';
+import { NotificationContext } from './notificationContextValue';
 
 export type NotificationType = 'info' | 'success' | 'warning' | 'error';
 
@@ -17,16 +16,12 @@ export interface Notification {
   duration?: number;
 }
 
-interface NotificationContextValue {
+export interface NotificationContextValue {
   notifications: Notification[];
   notify: (notification: Omit<Notification, 'id'>) => void;
   dismiss: (id: string) => void;
   clearAll: () => void;
 }
-
-const NotificationContext = createContext<NotificationContextValue | null>(
-  null,
-);
 
 let notificationId = 0;
 
@@ -66,12 +61,4 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
       {children}
     </NotificationContext.Provider>
   );
-}
-
-export function useNotifications() {
-  const ctx = useContext(NotificationContext);
-  if (!ctx) {
-    throw new Error('useNotifications must be used within NotificationProvider');
-  }
-  return ctx;
 }

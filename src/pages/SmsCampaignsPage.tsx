@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef } from 'react';
 import { PageContainer, ModulePageHeader } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Smartphone,
   Send,
@@ -62,6 +62,16 @@ const INITIAL_CAMPAIGNS: SmsCampaign[] = [
   { id: 'sms-1', name: 'Freshmen Seat Reservation Alert', senderId: 'CLGOSN', cohort: 'B.Tech Admitted List', text: 'Urgent: {first_name}, seat reservation fee of Rs 10,000 is due by 25th May to finalize your admission.', sentCount: 1520, deliveryRate: 98.6, clickRate: 34.2, status: 'Sent', date: '2026-05-18' },
   { id: 'sms-2', name: 'Open House Lab Tour RSVP', senderId: 'ADMISS', cohort: 'Inquiry Cohort', text: 'Hey {first_name}, secure your freshers orientation ticket by tonight. RSVP immediately here: clgos.in/rsvp', sentCount: 4850, deliveryRate: 99.1, clickRate: 28.5, status: 'Sent', date: '2026-05-20' },
   { id: 'sms-3', name: 'Transcript Upload Nudge', senderId: 'ADMISS', cohort: 'Incomplete Dossiers', text: 'Dear {first_name}, your application is pending outstanding transcripts. Please upload them by 24th May: clgos.in/portal', sentCount: 240, deliveryRate: 0, clickRate: 0, status: 'Scheduled', date: '2026-05-25' },
+  { id: 'sms-4', name: 'Scholarship Deadline Final Alert', senderId: 'CLGOSN', cohort: 'Scholarship Applicants', text: 'Reminder: {first_name}, merit scholarship applications close this Friday 5 PM. Submit your documents now: clgos.in/scholarship', sentCount: 680, deliveryRate: 97.8, clickRate: 41.6, status: 'Sent', date: '2026-05-17' },
+  { id: 'sms-5', name: 'Hostel Booking Window SMS', senderId: 'STUACN', cohort: 'B.Tech Admitted List', text: 'Hi {first_name}, hostel room allotment opens Mon 9 AM. Book your preferred block early: clgos.in/hostel', sentCount: 1520, deliveryRate: 99.3, clickRate: 52.8, status: 'Sent', date: '2026-05-22' },
+  { id: 'sms-6', name: 'Parent-Teacher Meet RSVP', senderId: 'ADMISS', cohort: 'B.Tech Admitted List', text: 'Dear parent of {first_name}, you are invited to the Pre-Admission Parent-Teacher Meet on June 1. RSVP here: clgos.in/ptm', sentCount: 1520, deliveryRate: 0, clickRate: 0, status: 'Scheduled', date: '2026-05-29' },
+];
+
+const SMS_COHORTS = [
+  { name: 'B.Tech Admitted List', count: 1520 },
+  { name: 'Inquiry Cohort', count: 4850 },
+  { name: 'Incomplete Dossiers', count: 240 },
+  { name: 'Scholarship Applicants', count: 680 },
 ];
 
 export function SmsCampaignsPage() {
@@ -88,24 +98,14 @@ export function SmsCampaignsPage() {
   const [credits, setCredits] = useState(48120);
   const [isRecharging, setIsRecharging] = useState(false);
 
-  // Static cohorts details
-  const cohorts = [
-    { name: 'B.Tech Admitted List', count: 1520 },
-    { name: 'Inquiry Cohort', count: 4850 },
-    { name: 'Incomplete Dossiers', count: 240 },
-    { name: 'Scholarship Applicants', count: 680 },
-  ];
-
   // SMS Calculations
-  // Standard text SMS = 160 chars.
-  // Multi-part SMS = 153 chars per block (due to User Data Header concatenation).
   const smsMetrics = useMemo(() => {
     const len = smsBody.length;
     let parts = 1;
     if (len > 160) {
       parts = Math.ceil(len / 153);
     }
-    const cohortData = cohorts.find(c => c.name === cohortSelect);
+    const cohortData = SMS_COHORTS.find(c => c.name === cohortSelect);
     const volume = cohortData ? cohortData.count : 500;
     const estCost = parts * volume * 0.15; // Rs. 0.15 per SMS credit
     return {
@@ -493,7 +493,7 @@ export function SmsCampaignsPage() {
                             onChange={(e) => setCohortSelect(e.target.value)}
                             className={styles.formSelect}
                           >
-                            {cohorts.map((c) => (
+                            {SMS_COHORTS.map((c) => (
                               <option key={c.name} value={c.name}>
                                 {c.name} ({c.count.toLocaleString()} students)
                               </option>

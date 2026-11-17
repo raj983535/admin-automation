@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   GraduationCap,
   Bell,
@@ -52,6 +52,20 @@ interface StudentAssignment {
   status: 'pending' | 'completed' | 'overdue';
 }
 
+const SGPA_HISTORY = [
+  { sem: '1st Sem', gpa: 8.6 },
+  { sem: '2nd Sem', gpa: 8.9 },
+  { sem: '3rd Sem', gpa: 9.1 },
+  { sem: '4th Sem', gpa: 8.7 },
+  { sem: '5th Sem', gpa: 9.3 }
+];
+
+const SUBJECTS_ATTENDANCE = [
+  { title: 'Deep Learning & Neural Nets', attended: 22, total: 25, pct: 88, status: 'green' },
+  { title: 'Advanced Vector Calculus', attended: 14, total: 20, pct: 70, status: 'orange' },
+  { title: 'Data Structures & Algorithms', attended: 23, total: 25, pct: 92, status: 'green' }
+];
+
 export function StudentPortalPage() {
   const { notify } = useNotifications();
 
@@ -77,7 +91,10 @@ export function StudentPortalPage() {
     { id: 'ASN-401', title: 'Convolutional Layer Mechanics', subject: 'Deep Learning', dueDate: 'May 24, 2026', status: 'pending' },
     { id: 'ASN-402', title: 'Stokes\' Calculus Proofs Set 2', subject: 'Vector Calculus', dueDate: 'May 22, 2026', status: 'pending' },
     { id: 'ASN-403', title: 'Red-Black Self Balancing tree codes', subject: 'Data Structures', dueDate: 'May 18, 2026', status: 'completed' },
-    { id: 'ASN-404', title: 'Big-O Asymptotic limits proof', subject: 'Data Structures', dueDate: 'May 12, 2026', status: 'completed' }
+    { id: 'ASN-404', title: 'Big-O Asymptotic limits proof', subject: 'Data Structures', dueDate: 'May 12, 2026', status: 'completed' },
+    { id: 'ASN-405', title: 'Banker\'s Algorithm Deadlock Analysis', subject: 'Operating Systems', dueDate: 'May 28, 2026', status: 'pending' },
+    { id: 'ASN-406', title: 'ER Diagram for Library Management', subject: 'DBMS', dueDate: 'May 26, 2026', status: 'pending' },
+    { id: 'ASN-407', title: 'Agile Sprint Retrospective Report', subject: 'Software Engineering', dueDate: 'May 15, 2026', status: 'completed' }
   ]);
 
   const [notices] = useState<Notice[]>([
@@ -89,7 +106,10 @@ export function StudentPortalPage() {
   const [timetable] = useState<ClassSlot[]>([
     { time: '09:00 AM - 10:30 AM', subject: 'Deep Learning (DL)', instructor: 'Dr. Sarah Jenkins', room: 'Lab 4' },
     { time: '11:00 AM - 12:30 PM', subject: 'Vector Calculus (VC)', instructor: 'Amit Kulkarni', room: 'LHC-101' },
-    { time: '01:30 PM - 03:00 PM', subject: 'Data Structures (DS)', instructor: 'Swati Sen', room: 'Lab 2' }
+    { time: '01:30 PM - 03:00 PM', subject: 'Data Structures (DS)', instructor: 'Swati Sen', room: 'Lab 2' },
+    { time: '03:15 PM - 04:45 PM', subject: 'Operating Systems (OS)', instructor: 'Prof. Amit Kulkarni', room: 'LHC-203' },
+    { time: '05:00 PM - 06:00 PM', subject: 'DBMS Lab (Practical)', instructor: 'Swati Sen', room: 'Lab 6' },
+    { time: '10:00 AM - 11:30 AM', subject: 'Software Engineering (SE)', instructor: 'Dr. Sarah Jenkins', room: 'LHC-105' }
   ]);
 
   // Modal displays
@@ -104,26 +124,10 @@ export function StudentPortalPage() {
   // Exemption form state
   const [leaveReason, setLeaveReason] = useState('Medical Checkup');
 
-  // GPA charts semesters
-  const sgpaHistory = [
-    { sem: '1st Sem', gpa: 8.6 },
-    { sem: '2nd Sem', gpa: 8.9 },
-    { sem: '3rd Sem', gpa: 9.1 },
-    { sem: '4th Sem', gpa: 8.7 },
-    { sem: '5th Sem', gpa: 9.3 }
-  ];
-
-  // Subject level attendance records
-  const subjectsAttendance = [
-    { title: 'Deep Learning & Neural Nets', attended: 22, total: 25, pct: 88, status: 'green' },
-    { title: 'Advanced Vector Calculus', attended: 14, total: 20, pct: 70, status: 'orange' },
-    { title: 'Data Structures & Algorithms', attended: 23, total: 25, pct: 92, status: 'green' }
-  ];
-
   // Overall attendance calculation
   const overallAttendance = useMemo(() => {
-    const totalAttended = subjectsAttendance.reduce((sum, s) => sum + s.attended, 0);
-    const totalHeld = subjectsAttendance.reduce((sum, s) => sum + s.total, 0);
+    const totalAttended = SUBJECTS_ATTENDANCE.reduce((sum, s) => sum + s.attended, 0);
+    const totalHeld = SUBJECTS_ATTENDANCE.reduce((sum, s) => sum + s.total, 0);
     return Math.round((totalAttended / totalHeld) * 100);
   }, []);
 
@@ -330,7 +334,7 @@ export function StudentPortalPage() {
               <CardHeader title="Subject Attendance Breakdown" subtitle="Department evaluations." />
               <CardBody className={styles.noPadding}>
                 <div className={styles.subjectAttendanceList}>
-                  {subjectsAttendance.map(subj => (
+                  {SUBJECTS_ATTENDANCE.map(subj => (
                     <div key={subj.title} className={styles.subjectRow}>
                       <div>
                         <strong className={styles.subjTitle}>{subj.title}</strong>
@@ -356,7 +360,7 @@ export function StudentPortalPage() {
             <CardBody className={styles.noPadding}>
               <div className={styles.transcriptList}>
                 <div className={styles.semGrid}>
-                  {sgpaHistory.map(hist => (
+                  {SGPA_HISTORY.map(hist => (
                     <div key={hist.sem} className={styles.semBlock}>
                       <span className={styles.semTitle}>{hist.sem}</span>
                       <div className={styles.semGpa}>{hist.gpa} SGPA</div>

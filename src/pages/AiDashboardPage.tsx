@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useMetricClick } from '../hooks/useMetricClick';
 import {
   Sparkles,
@@ -52,6 +52,9 @@ const INITIAL_NODES: SystemNode[] = [
   { id: 'node-2', name: 'Inquiry Classifier LLM-v4', type: 'Core Model', status: 'green', latency: '185ms', uptime: '99.95%' },
   { id: 'node-3', name: 'Tuition Fee Intent Sync Node', type: 'DB Sync Engine', status: 'yellow', latency: '320ms', uptime: '99.78%' },
   { id: 'node-4', name: 'Document Transcripts OCR Parser', type: 'Vision Node', status: 'green', latency: '92ms', uptime: '99.91%' },
+  { id: 'node-5', name: 'Scholarship Eligibility Resolver', type: 'Rules Engine', status: 'green', latency: '58ms', uptime: '99.97%' },
+  { id: 'node-6', name: 'Email Campaign Dispatch Queue', type: 'Message Broker', status: 'green', latency: '110ms', uptime: '99.88%' },
+  { id: 'node-7', name: 'Student Portal Auth Gateway', type: 'Auth Service', status: 'yellow', latency: '275ms', uptime: '99.72%' },
 ];
 
 const INITIAL_PROCESSES: ActiveProcess[] = [
@@ -59,12 +62,18 @@ const INITIAL_PROCESSES: ActiveProcess[] = [
   { id: 'proc-2', name: 'Document Verification OCR', category: 'Extraction', status: 'Active', accuracy: 94.2, processedToday: 380 },
   { id: 'proc-3', name: 'WhatsApp Autopilot Agent', category: 'Generation', status: 'Active', accuracy: 92.5, processedToday: 2150 },
   { id: 'proc-4', name: 'CRM Status Auto-Sync', category: 'Sync', status: 'Idle', accuracy: 99.9, processedToday: 840 },
+  { id: 'proc-5', name: 'Scholarship Merit Scorer', category: 'Classification', status: 'Active', accuracy: 97.3, processedToday: 610 },
+  { id: 'proc-6', name: 'Fee Receipt PDF Generator', category: 'Generation', status: 'Active', accuracy: 99.1, processedToday: 275 },
+  { id: 'proc-7', name: 'Hostel Allotment Extractor', category: 'Extraction', status: 'Paused', accuracy: 91.8, processedToday: 145 },
 ];
 
 const INITIAL_ALERTS: AnomalyAlert[] = [
   { id: 'alert-1', timestamp: '10:14 AM', source: 'WhatsApp Autopilot Agent', severity: 'Critical', message: 'Rate limit threshold hit on Meta Sandbox Endpoint: throttled.', resolved: false },
   { id: 'alert-2', timestamp: '12:05 PM', source: 'Document Verification OCR', severity: 'Warning', message: 'Low OCR parser confidence (41%) detected on freshman mark sheet upload.', resolved: false },
   { id: 'alert-3', timestamp: '01:42 PM', source: 'Tuition Fee Intent Sync Node', severity: 'Info', message: 'Minor packet loss detected on payment status polling trunk.', resolved: false },
+  { id: 'alert-4', timestamp: '02:30 PM', source: 'Scholarship Merit Scorer', severity: 'Warning', message: 'JEE percentile normalization table outdated — using 2025 cutoff references instead of 2026.', resolved: false },
+  { id: 'alert-5', timestamp: '03:18 PM', source: 'Student Portal Auth Gateway', severity: 'Critical', message: 'OAuth token refresh failure for 12 concurrent student sessions. SSO fallback activated.', resolved: false },
+  { id: 'alert-6', timestamp: '04:05 PM', source: 'Email Campaign Dispatch Queue', severity: 'Info', message: 'Bulk admission confirmation mailer batch 47 completed — 340 emails dispatched successfully.', resolved: true },
 ];
 
 export function AiDashboardPage() {

@@ -14,150 +14,22 @@ interface FunnelTemplate {
 }
 
 const templates: FunnelTemplate[] = [
-  {
-    id: 'admissions-standard',
-    name: 'Standard Admissions',
-    description: 'Complete admissions funnel from landing to confirmation',
-    category: 'admissions',
-    thumbnail: '🎓',
-    featured: true,
-    steps: 5
-  },
-  {
-    id: 'quick-apply',
-    name: 'Quick Application',
-    description: 'Streamlined application process for fast admissions',
-    category: 'admissions',
-    thumbnail: '⚡',
-    featured: true,
-    steps: 3
-  },
-  {
-    id: 'graduate-admissions',
-    name: 'Graduate Admissions',
-    description: 'Specialized funnel for graduate program applications',
-    category: 'admissions',
-    thumbnail: '📚',
-    featured: true,
-    steps: 6
-  },
-  {
-    id: 'international-students',
-    name: 'International Students',
-    description: 'Funnel for international student enrollment with visa support',
-    category: 'admissions',
-    thumbnail: '🌍',
-    featured: false,
-    steps: 7
-  },
-  {
-    id: 'event-registration',
-    name: 'Event Registration',
-    description: 'Funnel for campus event sign-ups and confirmations',
-    category: 'events',
-    thumbnail: '📅',
-    featured: false,
-    steps: 4
-  },
-  {
-    id: 'webinar-signup',
-    name: 'Webinar Registration',
-    description: 'Funnel for webinar registration and follow-up',
-    category: 'events',
-    thumbnail: '🎥',
-    featured: false,
-    steps: 4
-  },
-  {
-    id: 'campus-tour',
-    name: 'Campus Tour Booking',
-    description: 'Schedule campus visits with confirmation',
-    category: 'events',
-    thumbnail: '🏛️',
-    featured: false,
-    steps: 3
-  },
-  {
-    id: 'donation-campaign',
-    name: 'Donation Campaign',
-    description: 'Fundraising funnel with payment processing',
-    category: 'donations',
-    thumbnail: '💰',
-    featured: false,
-    steps: 4
-  },
-  {
-    id: 'alumni-giving',
-    name: 'Alumni Giving',
-    description: 'Alumni donation and engagement funnel',
-    category: 'donations',
-    thumbnail: '🎁',
-    featured: false,
-    steps: 5
-  },
-  {
-    id: 'student-survey',
-    name: 'Student Survey',
-    description: 'Feedback collection funnel with analytics',
-    category: 'surveys',
-    thumbnail: '📊',
-    featured: false,
-    steps: 3
-  },
-  {
-    id: 'course-evaluation',
-    name: 'Course Evaluation',
-    description: 'Student course feedback and rating funnel',
-    category: 'surveys',
-    thumbnail: '⭐',
-    featured: false,
-    steps: 3
-  },
-  {
-    id: 'scholarship-apply',
-    name: 'Scholarship Application',
-    description: 'Scholarship application with document upload',
-    category: 'admissions',
-    thumbnail: '🏆',
-    featured: false,
-    steps: 5
-  },
-  {
-    id: 'summer-program',
-    name: 'Summer Program',
-    description: 'Summer enrichment program enrollment',
-    category: 'admissions',
-    thumbnail: '☀️',
-    featured: false,
-    steps: 4
-  },
-  {
-    id: 'newsletter-signup',
-    name: 'Newsletter Signup',
-    description: 'Simple email newsletter subscription funnel',
-    category: 'surveys',
-    thumbnail: '📧',
-    featured: false,
-    steps: 2
-  },
-  {
-    id: 'volunteer-registration',
-    name: 'Volunteer Registration',
-    description: 'Campus volunteer sign-up and onboarding',
-    category: 'events',
-    thumbnail: '🤝',
-    featured: false,
-    steps: 4
-  },
-  {
-    id: 'research-participation',
-    name: 'Research Participation',
-    description: 'Student research study sign-up funnel',
-    category: 'surveys',
-    thumbnail: '🔬',
-    featured: false,
-    steps: 3
-  }
+  { id: 'admissions-standard', name: 'Standard Admissions', description: 'Full admission journey from landing page to confirmation.', category: 'admissions', thumbnail: 'ADM', featured: true, steps: 5 },
+  { id: 'quick-apply', name: 'Quick Application', description: 'Short inquiry funnel for high-intent leads and walk-in campaigns.', category: 'admissions', thumbnail: 'FAST', featured: true, steps: 3 },
+  { id: 'graduate-admissions', name: 'Graduate Admissions', description: 'Longer MBA/PG funnel with review and payment checkpoint.', category: 'admissions', thumbnail: 'PG', featured: true, steps: 6 },
+  { id: 'international-students', name: 'International Students', description: 'Enrollment path with document review, fee quote, and visa support.', category: 'admissions', thumbnail: 'INTL', featured: false, steps: 6 },
+  { id: 'event-registration', name: 'Event Registration', description: 'Campus event sign-up with payment and attendance confirmation.', category: 'events', thumbnail: 'EVT', featured: false, steps: 4 },
+  { id: 'webinar-signup', name: 'Webinar Registration', description: 'Webinar opt-in funnel with automated follow-up.', category: 'events', thumbnail: 'WEB', featured: false, steps: 3 },
+  { id: 'campus-tour', name: 'Campus Tour Booking', description: 'Schedule visits and route families to counsellors.', category: 'events', thumbnail: 'TOUR', featured: false, steps: 3 },
+  { id: 'donation-campaign', name: 'Donation Campaign', description: 'Fundraising funnel with donor details and payment step.', category: 'donations', thumbnail: 'GIVE', featured: false, steps: 4 },
+  { id: 'alumni-giving', name: 'Alumni Giving', description: 'Alumni engagement path with recurring giving prompts.', category: 'donations', thumbnail: 'ALUM', featured: false, steps: 4 },
+  { id: 'student-survey', name: 'Student Survey', description: 'Collect feedback and show analytics-ready response flow.', category: 'surveys', thumbnail: 'SURV', featured: false, steps: 3 },
+  { id: 'course-evaluation', name: 'Course Evaluation', description: 'Course feedback path for academic quality teams.', category: 'surveys', thumbnail: 'EVAL', featured: false, steps: 3 },
+  { id: 'scholarship-apply', name: 'Scholarship Application', description: 'Eligibility-first scholarship funnel with document review.', category: 'admissions', thumbnail: 'SCH', featured: false, steps: 5 },
+  { id: 'summer-program', name: 'Summer Program', description: 'Summer enrollment with seat fee and confirmation.', category: 'admissions', thumbnail: 'SUM', featured: false, steps: 4 },
+  { id: 'newsletter-signup', name: 'Newsletter Signup', description: 'Simple lead capture for nurturing parents and students.', category: 'surveys', thumbnail: 'MAIL', featured: false, steps: 2 },
+  { id: 'volunteer-registration', name: 'Volunteer Registration', description: 'Campus volunteer onboarding with approval checklist.', category: 'events', thumbnail: 'VOL', featured: false, steps: 4 },
+  { id: 'research-participation', name: 'Research Participation', description: 'Research study opt-in with consent and confirmation.', category: 'surveys', thumbnail: 'LAB', featured: false, steps: 3 },
 ];
 
 const categories = [
@@ -165,7 +37,7 @@ const categories = [
   { id: 'admissions', label: 'Admissions' },
   { id: 'events', label: 'Events' },
   { id: 'donations', label: 'Donations' },
-  { id: 'surveys', label: 'Surveys' }
+  { id: 'surveys', label: 'Surveys' },
 ];
 
 interface FunnelTemplatesProps {
@@ -181,7 +53,7 @@ function FunnelTemplatesComponent({ onSelectTemplate }: FunnelTemplatesProps) {
     return templates.filter(template => {
       const matchesCategory = selectedCategory === 'all' || template.category === selectedCategory;
       const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           template.description.toLowerCase().includes(searchQuery.toLowerCase());
+        template.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }, [selectedCategory, searchQuery]);
@@ -191,16 +63,12 @@ function FunnelTemplatesComponent({ onSelectTemplate }: FunnelTemplatesProps) {
     onSelectTemplate(templateId);
   }, [onSelectTemplate]);
 
-  const handleCategoryChange = useCallback((categoryId: string) => {
-    setSelectedCategory(categoryId);
-  }, []);
-
   return (
     <div className={styles.templateGallery}>
       <div className={styles.galleryHeader}>
         <div>
           <h2 className={styles.galleryTitle}>Funnel Templates</h2>
-          <p className={styles.gallerySubtitle}>Choose a template to get started quickly</p>
+          <p className={styles.gallerySubtitle}>Choose a working conversion example for your presentation</p>
         </div>
         <Button variant="primary" onClick={() => onSelectTemplate('blank')}>
           Start from Blank
@@ -213,7 +81,7 @@ function FunnelTemplatesComponent({ onSelectTemplate }: FunnelTemplatesProps) {
             <button
               key={cat.id}
               className={`${styles.categoryTab} ${selectedCategory === cat.id ? styles.active : ''}`}
-              onClick={() => handleCategoryChange(cat.id)}
+              onClick={() => setSelectedCategory(cat.id)}
             >
               {cat.label}
             </button>
@@ -258,11 +126,7 @@ function FunnelTemplatesComponent({ onSelectTemplate }: FunnelTemplatesProps) {
               </div>
             </div>
             <div className={styles.templateActions}>
-              <Button
-                variant="secondary"
-                size="sm"
-                className={styles.previewButton}
-              >
+              <Button variant="secondary" size="sm" className={styles.previewButton}>
                 <ExternalLink size={14} />
                 Preview
               </Button>
@@ -288,7 +152,7 @@ function FunnelTemplatesComponent({ onSelectTemplate }: FunnelTemplatesProps) {
 
       {filteredTemplates.length === 0 && (
         <div className={styles.emptyState}>
-          <div className={styles.emptyIcon}>🔍</div>
+          <div className={styles.emptyIcon}>NO</div>
           <h4>No templates found</h4>
           <p>Try adjusting your search or category filter</p>
         </div>

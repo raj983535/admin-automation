@@ -1,5 +1,5 @@
 import { Bell, Menu, Search, User } from 'lucide-react';
-import { useNotifications } from '../../contexts/NotificationContext';
+import { useNotifications } from '../../hooks/useNotifications';
 import { Button } from '../../components/ui/Button';
 import styles from './TopNavbar.module.css';
 

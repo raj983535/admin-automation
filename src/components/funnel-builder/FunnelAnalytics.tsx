@@ -1,19 +1,8 @@
 import { memo, useMemo } from 'react';
 import { X, TrendingUp, Users, ArrowDown, ArrowUp } from 'lucide-react';
 import { Button } from '../ui/Button';
+import type { FunnelStep } from '../../types/builder.types';
 import styles from './FunnelAnalytics.module.css';
-
-type FunnelStep = {
-  id: string;
-  name: string;
-  type: 'landing' | 'inquiry' | 'application' | 'review' | 'payment' | 'confirmation';
-  color: string;
-  conversionRate: number;
-  dropOffRate: number;
-  visitors: number;
-  conversions: number;
-  content: any;
-};
 
 interface FunnelAnalyticsProps {
   steps: FunnelStep[];
@@ -21,6 +10,28 @@ interface FunnelAnalyticsProps {
 }
 
 function FunnelAnalyticsComponent({ steps, onClose }: FunnelAnalyticsProps) {
+  const handleExport = () => {
+    const header = ['Step', 'Type', 'Visitors', 'Conversions', 'Conversion Rate', 'Drop Off'];
+    const rows = steps.map((step) => [
+      step.name,
+      step.type,
+      String(step.visitors),
+      String(step.conversions),
+      `${step.conversionRate.toFixed(1)}%`,
+      `${step.dropOffRate.toFixed(1)}%`,
+    ]);
+    const csv = [header, ...rows]
+      .map((row) => row.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(','))
+      .join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'funnel-analytics-demo.csv';
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   const metrics = useMemo(() => {
     if (steps.length === 0) {
       return {
@@ -175,7 +186,7 @@ function FunnelAnalyticsComponent({ steps, onClose }: FunnelAnalyticsProps) {
         <Button variant="secondary" size="sm" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" size="sm" onClick={() => console.log('Export analytics')}>
+        <Button variant="primary" size="sm" onClick={handleExport}>
           Export Report
         </Button>
       </div>

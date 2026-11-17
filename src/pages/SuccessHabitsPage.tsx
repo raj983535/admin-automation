@@ -1,7 +1,7 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Target,
   CheckCircle,
@@ -24,6 +24,8 @@ interface Habit {
   streak: number;
   status: 'gray' | 'blue' | 'purple' | 'orange' | 'green';
 }
+
+type HabitCategory = Habit['category'];
 
 interface Milestone {
   id: string;
@@ -81,6 +83,33 @@ const INITIAL_HABITS: Habit[] = [
     streak: 0,
     status: 'gray',
   },
+  {
+    id: 'HAB-105',
+    title: 'Solve 5 Physics Numerical Problems',
+    category: 'Physics',
+    frequency: 'Daily',
+    completed: false,
+    streak: 3,
+    status: 'purple',
+  },
+  {
+    id: 'HAB-106',
+    title: 'Read 1 Research Paper Abstract & Summary',
+    category: 'Computer Science',
+    frequency: 'Daily',
+    completed: true,
+    streak: 7,
+    status: 'green',
+  },
+  {
+    id: 'HAB-107',
+    title: 'Contribute to Open Source Repository',
+    category: 'Career',
+    frequency: 'Weekly',
+    completed: false,
+    streak: 2,
+    status: 'blue',
+  },
 ];
 
 const INITIAL_MILESTONES: Milestone[] = [
@@ -101,6 +130,24 @@ const INITIAL_MILESTONES: Milestone[] = [
     completed: false,
     unit: 'challenges passed',
     associatedMedal: 'Algorithm Specialist',
+  },
+  {
+    id: 'MIL-303',
+    title: 'Complete Mock Interview Practice Rounds',
+    target: 10,
+    current: 6,
+    completed: false,
+    unit: 'sessions completed',
+    associatedMedal: 'Interview Champion',
+  },
+  {
+    id: 'MIL-304',
+    title: 'Master Electromagnetism Numerical Sets',
+    target: 20,
+    current: 14,
+    completed: false,
+    unit: 'problems solved',
+    associatedMedal: 'Physics Prodigy',
   },
 ];
 
@@ -137,9 +184,27 @@ const INITIAL_ACHIEVEMENTS: Achievement[] = [
     unlocked: false,
     category: 'Career',
   },
+  {
+    id: 'ACH-505',
+    title: 'Interview Champion',
+    desc: 'Complete 10 mock interview sessions with peer reviewers and placement cell mentors.',
+    criteria: 'Mock interview milestone completed',
+    unlocked: false,
+    category: 'Career',
+  },
+  {
+    id: 'ACH-506',
+    title: 'Physics Prodigy',
+    desc: 'Solve 20 electromagnetism numerical problems and demonstrate mastery in field theory.',
+    criteria: 'Electromagnetism milestone completed',
+    unlocked: false,
+    category: 'Physics',
+  },
 ];
 
 const WEEKDAY_NAMES = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+let habitIdCounter = 200;
+const createHabitId = () => `HAB-${habitIdCounter++}`;
 
 export function SuccessHabitsPage() {
   const { notify } = useNotifications();
@@ -182,6 +247,12 @@ export function SuccessHabitsPage() {
 
   // Handle checking/unchecking a habit
   const handleToggleHabit = (habitId: string) => {
+    const targetHabit = habits.find(h => h.id === habitId);
+    const nextStreakForTarget = targetHabit && !targetHabit.completed ? targetHabit.streak + 1 : 0;
+    const shouldUnlockCodeWarrior = Boolean(
+      targetHabit?.title.includes('Coding Practice') && nextStreakForTarget >= 3
+    );
+
     setHabits(prev =>
       prev.map(h => {
         if (h.id === habitId) {
@@ -221,30 +292,24 @@ export function SuccessHabitsPage() {
         return h;
       })
     );
+
+    if (shouldUnlockCodeWarrior) {
+      setAchievements(prev =>
+        prev.map(ach => {
+          if (ach.id === 'ACH-501' && !ach.unlocked) {
+            notify({
+              type: 'success',
+              title: 'Medal Unlocked: Code Warrior!',
+              message: 'You have sustained code practice for 3 days. Premium gold border unlocked.',
+              duration: 5000,
+            });
+            return { ...ach, unlocked: true };
+          }
+          return ach;
+        })
+      );
+    }
   };
-
-  // Check achievements requirements after state change
-  useEffect(() => {
-    // 1. Code Warrior -> Coding streak >= 3
-    const codeHabit = habits.find(h => h.title.includes('Coding Practice'));
-    const shouldUnlockCodeWarrior = codeHabit ? codeHabit.streak >= 3 : false;
-
-    // Check if we need to update achievement
-    setAchievements(prev =>
-      prev.map(ach => {
-        if (ach.id === 'ACH-501' && !ach.unlocked && shouldUnlockCodeWarrior) {
-          notify({
-            type: 'success',
-            title: '🏅 Medal Unlocked: Code Warrior!',
-            message: 'You have sustained code practice for 3 days. Premium gold border unlocked.',
-            duration: 5000,
-          });
-          return { ...ach, unlocked: true };
-        }
-        return ach;
-      })
-    );
-  }, [habits, notify]);
 
   // Submit custom student habit
   const handleAddHabit = (e: React.FormEvent) => {
@@ -255,7 +320,7 @@ export function SuccessHabitsPage() {
     }
 
     const newHabitObj: Habit = {
-      id: `HAB-${Math.floor(100 + Math.random() * 900)}`,
+      id: createHabitId(),
       title: newTitle.trim(),
       category: newCategory,
       frequency: newFrequency,
@@ -438,7 +503,7 @@ export function SuccessHabitsPage() {
                       <span>Core Discipline</span>
                       <select
                         value={newCategory}
-                        onChange={e => setNewCategory(e.target.value as any)}
+                        onChange={e => setNewCategory(e.target.value as HabitCategory)}
                         className={styles.formSelect}
                       >
                         <option value="Computer Science">Computer Science</option>

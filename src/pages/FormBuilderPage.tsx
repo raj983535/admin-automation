@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer, ModulePageHeader } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Plus,
   Trash2,
@@ -44,6 +44,9 @@ interface FormField {
   showIfFieldId?: string;
   showIfValue?: string;
 }
+
+type FormValue = string | number | null;
+type SubmissionRecord = Record<string, FormValue>;
 
 // Initial templates
 const TEMPLATES: Record<string, { name: string; description: string; fields: FormField[] }> = {
@@ -115,11 +118,11 @@ export function FormBuilderPage() {
   const [formName, setFormName] = useState('Admission Inquiry');
 
   // Preview form values & state
-  const [previewValues, setPreviewValues] = useState<Record<string, any>>({});
+  const [previewValues, setPreviewValues] = useState<Record<string, FormValue>>({});
   const [previewStepIndex, setPreviewStepIndex] = useState(0);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [submittingPreview, setSubmittingPreview] = useState(false);
-  const [recentSubmissions, setRecentSubmissions] = useState<Array<{ id: string; date: string; data: any }>>([
+  const [recentSubmissions, setRecentSubmissions] = useState<Array<{ id: string; date: string; data: SubmissionRecord }>>([
     { id: 'sub-1', date: '2026-05-21 11:30', data: { 'Full Name': 'Sahil Sharma', 'Email Address': 'sahil@gmail.com', 'Phone Number': '+91 9876543210', 'Program of Interest': 'Computer Science', 'Preferred Intake Term': 'Fall 2026' } },
     { id: 'sub-2', date: '2026-05-21 09:15', data: { 'Full Name': 'Ananya Iyer', 'Email Address': 'emma@oxford.edu', 'Phone Number': '+1 505 401 2231', 'Program of Interest': 'Business Administration', 'Preferred Intake Term': 'Spring 2027' } },
   ]);
@@ -262,7 +265,7 @@ export function FormBuilderPage() {
     setSubmittingPreview(true);
     setTimeout(() => {
       // Create readable submission entry
-      const submissionData: Record<string, any> = {};
+      const submissionData: SubmissionRecord = {};
       fields.forEach((field) => {
         if (isFieldVisible(field) && field.type !== 'step_divider' && field.type !== 'payment') {
           submissionData[field.label] = previewValues[field.id] || '(Blank)';
@@ -1000,7 +1003,7 @@ export function FormBuilderPage() {
                           <td className={styles.dateCell}>{sub.date}</td>
                           <td>
                             <div className={styles.snippetGrid}>
-                              {Object.entries(sub.data).map(([key, val]: [string, any]) => (
+                              {Object.entries(sub.data).map(([key, val]) => (
                                 <span key={key} className={styles.snippetBadge}>
                                   <strong>{key}:</strong> {String(val)}
                                 </span>

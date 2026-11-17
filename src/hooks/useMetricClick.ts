@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from './useNotifications';
 import { metricDetailMessage } from '../utils/metricDetail';
 
 export function useMetricClick() {

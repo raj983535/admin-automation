@@ -1,24 +1,18 @@
 import { memo, useCallback } from 'react';
 import { X, Settings } from 'lucide-react';
 import { Button } from '../ui/Button';
+import type { PageSection, PageSectionContent } from '../../types/builder.types';
 import styles from './SettingsPanel.module.css';
-
-interface PageSection {
-  id: string;
-  type: 'hero' | 'features' | 'about' | 'programs' | 'testimonials' | 'contact' | 'footer';
-  title: string;
-  content: any;
-  visible: boolean;
-}
 
 interface SettingsPanelProps {
   section: PageSection;
-  onUpdate: (id: string, content: any) => void;
+  onUpdate: (id: string, content: PageSectionContent) => void;
   onClose: () => void;
+  onSave: () => void;
 }
 
-function SettingsPanelComponent({ section, onUpdate, onClose }: SettingsPanelProps) {
-  const handleContentChange = useCallback((key: string, value: any) => {
+function SettingsPanelComponent({ section, onUpdate, onClose, onSave }: SettingsPanelProps) {
+  const handleContentChange = useCallback(<K extends keyof PageSectionContent>(key: K, value: PageSectionContent[K]) => {
     onUpdate(section.id, {
       ...section.content,
       [key]: value
@@ -93,6 +87,54 @@ function SettingsPanelComponent({ section, onUpdate, onClose }: SettingsPanelPro
               <label className={styles.fieldLabel}>Program List</label>
               <p className={styles.fieldHint}>Edit programs in the canvas</p>
             </div>
+          </div>
+        );
+
+      case 'about':
+      case 'contact':
+        return (
+          <div className={styles.settingsGroup}>
+            <h4 className={styles.settingsGroupTitle}>{section.type === 'about' ? 'About Copy' : 'Contact Copy'}</h4>
+            <div className={styles.field}>
+              <label className={styles.fieldLabel}>Headline</label>
+              <input
+                type="text"
+                value={section.content.headline || ''}
+                onChange={(e) => handleContentChange('headline', e.target.value)}
+                className={styles.fieldInput}
+              />
+            </div>
+            <div className={styles.field}>
+              <label className={styles.fieldLabel}>Body</label>
+              <textarea
+                value={section.content.body || ''}
+                onChange={(e) => handleContentChange('body', e.target.value)}
+                className={styles.fieldTextarea}
+                rows={4}
+              />
+            </div>
+            {section.type === 'contact' && (
+              <>
+                <div className={styles.field}>
+                  <label className={styles.fieldLabel}>Phone</label>
+                  <input
+                    type="text"
+                    value={section.content.phone || ''}
+                    onChange={(e) => handleContentChange('phone', e.target.value)}
+                    className={styles.fieldInput}
+                  />
+                </div>
+                <div className={styles.field}>
+                  <label className={styles.fieldLabel}>Email</label>
+                  <input
+                    type="email"
+                    value={section.content.email || ''}
+                    onChange={(e) => handleContentChange('email', e.target.value)}
+                    className={styles.fieldInput}
+                  />
+                </div>
+              </>
+            )}
           </div>
         );
 
@@ -187,7 +229,7 @@ function SettingsPanelComponent({ section, onUpdate, onClose }: SettingsPanelPro
         <Button variant="secondary" size="sm" onClick={onClose}>
           Close
         </Button>
-        <Button variant="primary" size="sm" onClick={() => console.log('Changes saved')}>
+        <Button variant="primary" size="sm" onClick={onSave}>
           Save Changes
         </Button>
       </div>

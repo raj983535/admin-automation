@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Users,
   AlertTriangle,
@@ -102,6 +102,36 @@ const INITIAL_STUDENTS: StudentRecord[] = [
     status: 'pending',
     parentContact: '+91 98765 05562',
   },
+  {
+    enrollmentId: 'ENR-2023-11',
+    name: 'Rohan Verma',
+    branch: 'Electronics',
+    semester: '6th Sem',
+    attendancePct: 84.2,
+    cgpa: '8.35',
+    status: 'active',
+    parentContact: '+91 98765 06741',
+  },
+  {
+    enrollmentId: 'ENR-2024-28',
+    name: 'Sneha Rao',
+    branch: 'Computer Science',
+    semester: '4th Sem',
+    attendancePct: 90.6,
+    cgpa: '9.02',
+    status: 'active',
+    parentContact: '+91 98765 07255',
+  },
+  {
+    enrollmentId: 'ENR-2025-51',
+    name: 'Vikram Joshi',
+    branch: 'Information Tech',
+    semester: '2nd Sem',
+    attendancePct: 68.3,
+    cgpa: '6.78',
+    status: 'warning',
+    parentContact: '+91 98765 08102',
+  },
 ];
 
 const INITIAL_TIMETABLE: TimetableSlot[] = [
@@ -114,6 +144,8 @@ const INITIAL_EXAMS: ExamSchedule[] = [
   { id: 'EXM-701', name: 'Mid-Term Discrete Fields', date: '2026-06-02', branch: 'Computer Science', scheduled: true },
   { id: 'EXM-702', name: 'Deep Learning Practicals', date: '2026-06-08', branch: 'Information Tech', scheduled: false },
   { id: 'EXM-703', name: 'Fluid Mechanics End-Sem', date: '2026-06-12', branch: 'Mechanical', scheduled: false },
+  { id: 'EXM-704', name: 'Signals & Systems Mid-Term', date: '2026-06-15', branch: 'Electronics', scheduled: false },
+  { id: 'EXM-705', name: 'Data Structures Lab Viva', date: '2026-06-18', branch: 'Computer Science', scheduled: true },
 ];
 
 export function SchoolModulePage() {

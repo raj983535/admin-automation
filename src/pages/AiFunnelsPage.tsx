@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   GitBranch,
   TrendingUp,
@@ -68,6 +68,8 @@ const INITIAL_RECOMMENDATIONS: Recommendation[] = [
   { id: 'rec-1', title: 'Automate SMS Nudge for Uploads', targetStep: 'Document Upload', impact: '+8.5% Uplift', upliftPercent: 8.5, description: 'Send a automated text message 2 hours after form submission with a fast-upload link.', applied: false },
   { id: 'rec-2', title: 'Enable WhatsApp Auto-Clarify on Fee Errors', targetStep: 'Deposit Fee Locked', impact: '+12.0% Uplift', upliftPercent: 12.0, description: 'Trigger dynamic AI chat assistant when payment failures or banks decline cards.', applied: false },
   { id: 'rec-3', title: 'Implement AI Zip-Code Form Autofill', targetStep: 'Form Submissions', impact: '+3.2% Uplift', upliftPercent: 3.2, description: 'Autofill state, city, and high-school location based on zip code input.', applied: true },
+  { id: 'rec-4', title: 'Smart Interview Slot Matcher', targetStep: 'Interview / Counselling', impact: '+6.8% Uplift', upliftPercent: 6.8, description: 'AI analyzes student calendar preferences from WhatsApp and auto-assigns the nearest available counselling slot to minimize scheduling conflicts.', applied: false },
+  { id: 'rec-5', title: 'Document Upload Image Compressor', targetStep: 'Document Upload', impact: '+4.1% Uplift', upliftPercent: 4.1, description: 'Client-side image resizer automatically compresses mark sheet photos exceeding the 2MB limit before upload, eliminating file-size rejection errors.', applied: false },
 ];
 
 const INITIAL_TESTS: AbTest[] = [
@@ -80,6 +82,9 @@ const INITIAL_TRAFFIC: TrafficChannel[] = [
   { channel: 'Google Search PPC', sessions: 3200, leads: 288, conversion: 9.0, qualityScore: 'High', stageColor: 'green' },
   { channel: 'Email Campaign Newsletter', sessions: 1200, leads: 74, conversion: 6.1, qualityScore: 'Medium', stageColor: 'yellow' },
   { channel: 'Direct Student Portal', sessions: 800, leads: 30, conversion: 3.7, qualityScore: 'Low', stageColor: 'orange' },
+  { channel: 'WhatsApp Broadcast Campaign', sessions: 2400, leads: 192, conversion: 8.0, qualityScore: 'High', stageColor: 'green' },
+  { channel: 'YouTube Pre-Roll Ads', sessions: 1800, leads: 54, conversion: 3.0, qualityScore: 'Low', stageColor: 'orange' },
+  { channel: 'Alumni Referral Program', sessions: 650, leads: 78, conversion: 12.0, qualityScore: 'High', stageColor: 'green' },
 ];
 
 export function AiFunnelsPage() {

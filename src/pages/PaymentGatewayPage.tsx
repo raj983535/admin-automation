@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useMetricClick } from '../hooks/useMetricClick';
 import {
   CreditCard,
@@ -32,6 +32,9 @@ const INITIAL_TRANSACTIONS: Transaction[] = [
   { id: 'TXN-99803', studentName: 'Rohan Verma', amount: 120000, method: 'Card', timestamp: '2026-05-21 12:45 PM', status: 'pending', referenceNo: 'REF-CARD-5524' },
   { id: 'TXN-99804', studentName: 'Arjun Singhal', amount: 80000, method: 'UPI', timestamp: '2026-05-20 03:15 PM', status: 'failed', referenceNo: 'REF-UPI-1090' },
   { id: 'TXN-99805', studentName: 'Kabir Malhotra', amount: 95000, method: 'Wallet', timestamp: '2026-05-20 04:40 PM', status: 'success', referenceNo: 'REF-WLT-3304' },
+  { id: 'TXN-99806', studentName: 'Sahil Sharma', amount: 85000, method: 'UPI', timestamp: '2026-05-20 05:12 PM', status: 'success', referenceNo: 'REF-UPI-4418' },
+  { id: 'TXN-99807', studentName: 'Priya Pillai', amount: 85000, method: 'Card', timestamp: '2026-05-19 09:30 AM', status: 'pending', referenceNo: 'REF-CARD-7762' },
+  { id: 'TXN-99808', studentName: 'Sneha Rao', amount: 95000, method: 'Wallet', timestamp: '2026-05-19 02:50 PM', status: 'failed', referenceNo: 'REF-WLT-5501' },
 ];
 
 export function PaymentGatewayPage() {

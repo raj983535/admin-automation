@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Search,
   Plus,
@@ -34,6 +34,11 @@ interface ForumQuestion {
   replies: ForumReply[];
   hasUpvoted?: boolean;
 }
+
+type QuestionCategory = ForumQuestion['category'];
+
+let forumReplyIdCounter = 9000;
+const createForumReplyId = () => `REP-${forumReplyIdCounter++}`;
 
 export function DiscussionForumPage() {
   const { notify } = useNotifications();
@@ -113,6 +118,68 @@ export function DiscussionForumPage() {
       tags: ['electromagnetism', 'coaxial', 'inductance'],
       date: '5 hours ago',
       likes: 3,
+      replies: []
+    },
+    {
+      id: 'QNA-704',
+      title: 'Dijkstra vs Bellman-Ford: When to use negative edge weights?',
+      explanation: 'I understand that Dijkstra fails with negative edges, but Bellman-Ford handles them. Can someone explain the exact failure case with Dijkstra and why the greedy relaxation assumption breaks down?',
+      author: 'Kabir Malhotra (4th Sem)',
+      category: 'Computer Science',
+      status: 'answered',
+      tags: ['graphs', 'shortest-path', 'algorithms'],
+      date: '6 hours ago',
+      likes: 11,
+      replies: [
+        {
+          id: 'REP-7041',
+          author: 'Swati Sen',
+          role: 'faculty',
+          content: 'Dijkstra assumes that once a node is finalized (extracted from priority queue), its shortest distance is confirmed. With negative edges, a later path through a negative weight could yield a shorter distance, violating this invariant. Bellman-Ford relaxes all edges V-1 times, handling this correctly at O(VE) complexity.',
+          time: '4 hours ago',
+          likes: 8
+        }
+      ]
+    },
+    {
+      id: 'QNA-705',
+      title: 'How do you compute eigenvalues for a 3x3 non-symmetric matrix?',
+      explanation: 'In our linear algebra assignment, we need to find eigenvalues of a 3x3 matrix that is not symmetric. The characteristic polynomial is cubic. Is there a shortcut or do we always expand the full determinant?',
+      author: 'Priya Pillai (5th Sem)',
+      category: 'Mathematics',
+      status: 'faculty verified',
+      tags: ['linear-algebra', 'eigenvalues', 'matrices'],
+      date: '8 hours ago',
+      likes: 14,
+      replies: [
+        {
+          id: 'REP-7051',
+          author: 'Rohan Verma (4th Year)',
+          role: 'student',
+          content: 'You can use cofactor expansion along the row with the most zeros to simplify the determinant calculation. Also, the sum of eigenvalues equals the trace, and the product equals the determinant — useful for verification.',
+          time: '7 hours ago',
+          likes: 5
+        },
+        {
+          id: 'REP-7052',
+          author: 'Amit Kulkarni',
+          role: 'faculty',
+          content: 'Rohan is correct. For 3x3 matrices, the characteristic equation det(A - λI) = 0 yields a cubic polynomial. Use the trace (sum of diagonal) for the λ² coefficient, sum of 2x2 cofactors for the λ coefficient, and det(A) for the constant term. This avoids full expansion and is the standard approach in examinations.',
+          time: '5 hours ago',
+          likes: 10
+        }
+      ]
+    },
+    {
+      id: 'QNA-706',
+      title: 'Difference between SN1 and SN2 nucleophilic substitution mechanisms?',
+      explanation: 'I keep confusing when a reaction follows SN1 versus SN2 pathway. What are the key factors — substrate structure, solvent polarity, or nucleophile strength?',
+      author: 'Arjun Singhal (3rd Sem)',
+      category: 'Chemistry',
+      status: 'unanswered',
+      tags: ['organic-chemistry', 'reactions', 'mechanisms'],
+      date: '10 hours ago',
+      likes: 6,
       replies: []
     }
   ]);
@@ -212,7 +279,7 @@ export function DiscussionForumPage() {
     if (!text.trim()) return;
 
     const newReply: ForumReply = {
-      id: `REP-${Math.floor(1000 + Math.random() * 9000)}`,
+      id: createForumReplyId(),
       author: 'Sahil Sharma (6th Sem)',
       role: 'student',
       content: text.trim(),
@@ -338,7 +405,7 @@ export function DiscussionForumPage() {
                       <span>Target Subject</span>
                       <select
                         value={askCategory}
-                        onChange={e => setAskCategory(e.target.value as any)}
+                        onChange={e => setAskCategory(e.target.value as QuestionCategory)}
                         className={styles.askSelect}
                       >
                         <option value="Computer Science">Computer Science</option>

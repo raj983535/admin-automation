@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, MetricTile } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useMetricClick } from '../hooks/useMetricClick';
 import {
   Calendar,
@@ -28,6 +28,14 @@ interface CounsellorPerformance {
   conversionRate: number;
   channelSource: string;
 }
+
+const COUNSELLOR_PERFORMANCE_DATA: CounsellorPerformance[] = [
+  { counsellor: 'Swati Sen', assigned: 340, contacted: 310, converted: 48, conversionRate: 14.1, channelSource: 'Meta Ads' },
+  { counsellor: 'Dr. Sarah Jenkins', assigned: 290, contacted: 265, converted: 38, conversionRate: 13.1, channelSource: 'Google Search' },
+  { counsellor: 'Amit Kulkarni', assigned: 210, contacted: 180, converted: 22, conversionRate: 10.4, channelSource: 'Referral' },
+  { counsellor: 'Rajesh Nair', assigned: 280, contacted: 240, converted: 25, conversionRate: 8.9, channelSource: 'Direct Traffic' },
+  { counsellor: 'Nisha Varma', assigned: 300, contacted: 270, converted: 30, conversionRate: 10.0, channelSource: 'Meta Ads' },
+];
 
 export function AnalyticsPage() {
   const { notify } = useNotifications();
@@ -88,22 +96,13 @@ export function AnalyticsPage() {
     return 'rgba(196, 165, 116, 0.08)'; // Subtle wash
   };
 
-  // Live Performance Table Data
-  const counsellorPerformanceData: CounsellorPerformance[] = [
-    { counsellor: 'Swati Sen', assigned: 340, contacted: 310, converted: 48, conversionRate: 14.1, channelSource: 'Meta Ads' },
-    { counsellor: 'Dr. Sarah Jenkins', assigned: 290, contacted: 265, converted: 38, conversionRate: 13.1, channelSource: 'Google Search' },
-    { counsellor: 'Amit Kulkarni', assigned: 210, contacted: 180, converted: 22, conversionRate: 10.4, channelSource: 'Referral' },
-    { counsellor: 'Rajesh Nair', assigned: 280, contacted: 240, converted: 25, conversionRate: 8.9, channelSource: 'Direct Traffic' },
-    { counsellor: 'Nisha Varma', assigned: 300, contacted: 270, converted: 30, conversionRate: 10.0, channelSource: 'Meta Ads' },
-  ];
-
   const filteredPerformance = useMemo(() => {
-    return counsellorPerformanceData.filter(item => {
+    return COUNSELLOR_PERFORMANCE_DATA.filter(item => {
       const matchSearch = item.counsellor.toLowerCase().includes(tableSearch.toLowerCase()) || 
                           item.channelSource.toLowerCase().includes(tableSearch.toLowerCase());
       return matchSearch;
     });
-  }, [counsellorPerformanceData, tableSearch]);
+  }, [tableSearch]);
 
   // Export simulator
   const handleExportData = (type: 'CSV' | 'PDF') => {

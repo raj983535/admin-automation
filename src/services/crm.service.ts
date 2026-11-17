@@ -3,8 +3,8 @@ import { INITIAL_LEADS } from '../mock/crm.mock';
 
 class CrmService {
   async getLeads(): Promise<StudentLead[]> {
-    // Simulate network latency for modular SaaS readiness
-    return new Promise((resolve) => setTimeout(() => resolve([...INITIAL_LEADS]), 600));
+    // Return mock data instantly for demo presentation
+    return Promise.resolve([...INITIAL_LEADS]);
   }
 }
 

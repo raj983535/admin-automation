@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Copy,
   QrCode,
@@ -505,7 +505,7 @@ export function UrlShortenerPage() {
                 <div className={styles.destSnippet}>
                   <span>Destination Long Link:</span>
                   <p>{selectedUrl.longLink}</p>
-                  <a href={selectedUrl.longLink} target="_blank" rel="noreferrer" className={styles.visitDestLink}>
+                  <a href={selectedUrl.longLink} target="_blank" rel="noopener noreferrer" className={styles.visitDestLink}>
                     Visit Destination <ExternalLink size={10} />
                   </a>
                 </div>

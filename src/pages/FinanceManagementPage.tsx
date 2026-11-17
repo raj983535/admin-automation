@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import { useMetricClick } from '../hooks/useMetricClick';
 import {
   DollarSign,
@@ -43,13 +43,18 @@ const INITIAL_INVOICES: Invoice[] = [
   { id: 'INV-2026-004', studentName: 'Kabir Malhotra', course: 'MBA Marketing', amount: 95000, dueDate: '2026-05-12', status: 'overdue' },
   { id: 'INV-2026-005', studentName: 'Arjun Singhal', course: 'B.Tech IT', amount: 80000, dueDate: '2026-05-15', status: 'failed' },
   { id: 'INV-2026-006', studentName: 'Kabir Malhotra', course: 'B.Tech Biotech', amount: 90000, dueDate: '2026-04-10', status: 'refunded' },
-  { id: 'INV-2026-007', studentName: 'Ananya Iyer', course: 'B.Tech Biotechnology', amount: 90000, dueDate: '2026-05-23', status: 'paid' }
+  { id: 'INV-2026-007', studentName: 'Ananya Iyer', course: 'B.Tech Biotechnology', amount: 90000, dueDate: '2026-05-23', status: 'paid' },
+  { id: 'INV-2026-008', studentName: 'Rohan Verma', course: 'MBA Finance', amount: 120000, dueDate: '2026-05-28', status: 'paid' },
+  { id: 'INV-2026-009', studentName: 'Sahil Sharma', course: 'B.Tech CSE', amount: 85000, dueDate: '2026-06-05', status: 'pending' },
+  { id: 'INV-2026-010', studentName: 'Sneha Rao', course: 'MBA Marketing', amount: 95000, dueDate: '2026-05-08', status: 'overdue' },
 ];
 
 const INITIAL_REFUNDS: RefundRequest[] = [
   { id: 'REF-8801', studentName: 'Sahil Sharma', course: 'B.Tech CSE', reason: 'Decided to opt for dual-degree program in USA.', amount: 45000, requestedDate: '2026-05-19', status: 'pending' },
   { id: 'REF-8802', studentName: 'Sneha Rao', course: 'MBA Finance', reason: 'Medical emergency health leave of absence.', amount: 60000, requestedDate: '2026-05-20', status: 'pending' },
   { id: 'REF-8803', studentName: 'Karan Johar', course: 'B.Tech IT', reason: 'Requested hostel allocation waiver after paying fee package.', amount: 15000, requestedDate: '2026-05-21', status: 'pending' },
+  { id: 'REF-8804', studentName: 'Priya Pillai', course: 'B.Tech CSE', reason: 'Branch transfer to B.Tech Biotech approved by academic council.', amount: 32000, requestedDate: '2026-05-25', status: 'pending' },
+  { id: 'REF-8805', studentName: 'Arjun Singhal', course: 'B.Tech IT', reason: 'Duplicate semester fee payment via UPI and card on same day.', amount: 80000, requestedDate: '2026-05-27', status: 'pending' },
 ];
 
 export function FinanceManagementPage() {

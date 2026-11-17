@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Phone,
   Plus,
@@ -77,6 +77,17 @@ const RECORDINGS: CallRecording[] = [
   { id: 'rec-4', student: 'Ananya Rao', phone: '+91 91234 56789', intent: 'Admission Inquiry (MBA)', duration: '01:10', time: '1d ago' },
 ];
 
+const parseDuration = (dur: string) => {
+  const parts = dur.split(':');
+  return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+};
+
+const formatPlaybackTime = (sec: number) => {
+  const m = Math.floor(sec / 60).toString().padStart(2, '0');
+  const s = (sec % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+};
+
 export function IvrCallsPage() {
   const { notify } = useNotifications();
 
@@ -90,7 +101,7 @@ export function IvrCallsPage() {
 
   // Active audio simulated progress countdown
   useEffect(() => {
-    let interval: any;
+    let interval: ReturnType<typeof setInterval> | undefined;
     if (isPlaying && activeRecording) {
       interval = setInterval(() => {
         setPlaybackSeconds((prev) => {
@@ -108,19 +119,10 @@ export function IvrCallsPage() {
         });
       }, 1000);
     }
-    return () => clearInterval(interval);
-  }, [isPlaying, activeRecording]);
-
-  const parseDuration = (dur: string) => {
-    const parts = dur.split(':');
-    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
-  };
-
-  const formatPlaybackTime = (sec: number) => {
-    const m = Math.floor(sec / 60).toString().padStart(2, '0');
-    const s = (sec % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  };
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isPlaying, activeRecording, notify]);
 
   // Node editing state
   const handleNodeConfigChange = (id: string, key: string, value: string) => {

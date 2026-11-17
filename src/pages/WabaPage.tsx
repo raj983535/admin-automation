@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PageContainer, ModulePageHeader } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   ShieldCheck,
   Plus,
@@ -19,6 +19,8 @@ interface WabaTemplate {
   text: string;
 }
 
+type WabaTemplateCategory = WabaTemplate['category'];
+
 const INITIAL_TEMPLATES: WabaTemplate[] = [
   { id: 'wt-1', name: 'admission_orientation_welcome', category: 'Marketing', language: 'English (US)', status: 'Approved', text: 'Welcome to CollegeOS, {1}! Your orientation checklist guide is available at {2}.' },
   { id: 'wt-2', name: 'document_submission_alert', category: 'Utility', language: 'English (US)', status: 'Approved', text: 'Hi {1}, your transcripts verification is pending. Upload PDF to {2} to proceed.' },
@@ -33,7 +35,7 @@ export function WabaPage() {
 
   // Form Fields
   const [templateName, setTemplateName] = useState('');
-  const [templateCat, setTemplateCat] = useState<'Marketing' | 'Utility'>('Utility');
+  const [templateCat, setTemplateCat] = useState<WabaTemplateCategory>('Utility');
   const [templateLang, setTemplateLang] = useState('English (US)');
   const [templateText, setTemplateText] = useState('');
 
@@ -296,7 +298,7 @@ export function WabaPage() {
                   <span>Message Category</span>
                   <select
                     value={templateCat}
-                    onChange={(e) => setTemplateCat(e.target.value as any)}
+                    onChange={(e) => setTemplateCat(e.target.value as WabaTemplateCategory)}
                     className={styles.formSelect}
                   >
                     <option value="Utility">Utility (Transactional notices)</option>

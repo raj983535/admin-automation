@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   FolderOpen,
   FileText,
@@ -30,6 +30,9 @@ interface VaultFile {
   downloadsCount: number;
   description: string;
 }
+
+type VaultCategory = VaultFile['category'];
+type VaultStatus = VaultFile['status'];
 
 interface AccessLog {
   id: string;
@@ -155,6 +158,46 @@ const INITIAL_FILES: VaultFile[] = [
     downloadsCount: 20,
     description: 'Historical privacy policy and student handbook rules. Superseded by 2026 compliance guidelines.',
   },
+
+  // Additional Student Documents
+  {
+    id: 'DOC-903',
+    name: 'transcript_ananya_iyer_btech_cse.pdf',
+    category: 'Student Documents',
+    size: '3.6 MB',
+    uploadedBy: 'Meera Deshmukh',
+    uploadedAt: '2026-04-20',
+    status: 'secure',
+    encryptionHash: 'SHA256:f1e2d3c4...7a8b',
+    downloadsCount: 2,
+    description: 'Official academic transcript for Ananya Iyer — B.Tech CSE Semesters 1-4 with CGPA 9.12 and distinction marks.',
+  },
+  {
+    id: 'DOC-904',
+    name: 'hostel_allotment_letter_fall_2026.pdf',
+    category: 'Student Documents',
+    size: '890 KB',
+    uploadedBy: 'Karan Malhotra',
+    uploadedAt: '2026-05-15',
+    status: 'shared',
+    encryptionHash: 'SHA256:c8d9e0f1...2345',
+    downloadsCount: 14,
+    description: 'Batch hostel room allotment letters for 120 incoming freshers — double-sharing wing assignments for Block C and D.',
+  },
+
+  // Additional Certificates
+  {
+    id: 'DOC-913',
+    name: 'naac_a_plus_grading_certificate.pdf',
+    category: 'Certificates',
+    size: '2.8 MB',
+    uploadedBy: 'Dr. Sarah Jenkins',
+    uploadedAt: '2026-01-28',
+    status: 'secure',
+    encryptionHash: 'SHA256:5b6a7c8d...ef01',
+    downloadsCount: 6,
+    description: 'National Assessment and Accreditation Council (NAAC) A+ Grade certificate valid until 2031.',
+  },
 ];
 
 export function VaultPage() {
@@ -179,6 +222,9 @@ export function VaultPage() {
     { id: 'LOG-301', fileName: 'enrollment_dossier_sahil_sharma.pdf', actor: 'Meera Deshmukh', action: 'Accessed', time: '5 mins ago' },
     { id: 'LOG-302', fileName: 'tuition_invoices_reconciliation_q1.xlsx', actor: 'Rohan Sharma', action: 'Modified Clearance', time: '30 mins ago' },
     { id: 'LOG-303', fileName: 'btech_degree_template_gold_embossed.eps', actor: 'Dr. Sarah Jenkins', action: 'Decrypted', time: '1 hour ago' },
+    { id: 'LOG-304', fileName: 'transcript_ananya_iyer_btech_cse.pdf', actor: 'Meera Deshmukh', action: 'Downloaded', time: '2 hours ago' },
+    { id: 'LOG-305', fileName: 'naac_a_plus_grading_certificate.pdf', actor: 'Dr. Sarah Jenkins', action: 'Accessed', time: '3 hours ago' },
+    { id: 'LOG-306', fileName: 'hostel_allotment_letter_fall_2026.pdf', actor: 'Karan Malhotra', action: 'Modified Clearance', time: '4 hours ago' },
   ]);
 
   // Custom document addition
@@ -559,7 +605,7 @@ export function VaultPage() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                     <label className={styles.formLabel}>
                       <span>Partition Category *</span>
-                      <select value={newFileCategory} onChange={e => setNewFileCategory(e.target.value as any)} className={styles.formSelect}>
+                      <select value={newFileCategory} onChange={e => setNewFileCategory(e.target.value as VaultCategory)} className={styles.formSelect}>
                         <option value="Student Documents">Student Documents</option>
                         <option value="Certificates">Certificates</option>
                         <option value="Financial Records">Financial Records</option>
@@ -568,7 +614,7 @@ export function VaultPage() {
                     </label>
                     <label className={styles.formLabel}>
                       <span>Clearance Classification *</span>
-                      <select value={newFileStatus} onChange={e => setNewFileStatus(e.target.value as any)} className={styles.formSelect}>
+                      <select value={newFileStatus} onChange={e => setNewFileStatus(e.target.value as VaultStatus)} className={styles.formSelect}>
                         <option value="secure">Secure</option>
                         <option value="restricted">Restricted</option>
                         <option value="shared">Shared</option>
@@ -775,7 +821,7 @@ export function VaultPage() {
                 <span>Modify Security Classification Map</span>
                 <select
                   value={selectedFile.status}
-                  onChange={e => handleUpdateClearance(selectedFile.id, e.target.value as any)}
+                  onChange={e => handleUpdateClearance(selectedFile.id, e.target.value as VaultStatus)}
                   className={styles.formSelect}
                 >
                   <option value="secure">Secure</option>

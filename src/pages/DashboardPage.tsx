@@ -1,9 +1,7 @@
+import React, { Suspense } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader } from '../components/ui';
 import { KpiCard } from '../components/dashboard/KpiCard';
-import { AdmissionsTrendChart } from '../components/dashboard/charts/AdmissionsTrendChart';
-import { ConversionChart } from '../components/dashboard/charts/ConversionChart';
-import { FeeCollectionChart } from '../components/dashboard/charts/FeeCollectionChart';
 import { ActivityFeedWidget } from '../components/dashboard/widgets/ActivityFeedWidget';
 import { AutomationWidget } from '../components/dashboard/widgets/AutomationWidget';
 import { CommunicationWidget } from '../components/dashboard/widgets/CommunicationWidget';
@@ -13,8 +11,19 @@ import { FinanceWidget } from '../components/dashboard/widgets/FinanceWidget';
 import { AIActivityWidget } from '../components/dashboard/widgets/AIActivityWidget';
 import { CounsellingWidget } from '../components/dashboard/widgets/CounsellingWidget';
 import { AnalyticsHighlightWidget } from '../components/dashboard/widgets/AnalyticsHighlightWidget';
-import { kpiMetrics } from '../data/mock/dashboard';
+import { kpiMetrics } from '../mock/dashboard.mock';
 import styles from './DashboardPage.module.css';
+
+// Lazy load heavy Recharts components — they load AFTER the dashboard shell renders
+const AdmissionsTrendChart = React.lazy(() => import('../components/dashboard/charts/AdmissionsTrendChart').then(m => ({ default: m.AdmissionsTrendChart })));
+const ConversionChart = React.lazy(() => import('../components/dashboard/charts/ConversionChart').then(m => ({ default: m.ConversionChart })));
+const FeeCollectionChart = React.lazy(() => import('../components/dashboard/charts/FeeCollectionChart').then(m => ({ default: m.FeeCollectionChart })));
+
+const ChartPlaceholder = () => (
+  <div style={{ height: 260, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)', fontSize: '13px' }}>
+    Loading chart…
+  </div>
+);
 
 export function DashboardPage() {
   return (
@@ -37,7 +46,9 @@ export function DashboardPage() {
             subtitle="Daily volume — last 7 days"
           />
           <CardBody>
-            <AdmissionsTrendChart />
+            <Suspense fallback={<ChartPlaceholder />}>
+              <AdmissionsTrendChart />
+            </Suspense>
           </CardBody>
         </Card>
         <Card padding="md" variant="default" className={styles.chartCardNarrow}>
@@ -46,7 +57,9 @@ export function DashboardPage() {
             subtitle="Stage counts (active cycle)"
           />
           <CardBody>
-            <ConversionChart />
+            <Suspense fallback={<ChartPlaceholder />}>
+              <ConversionChart />
+            </Suspense>
           </CardBody>
         </Card>
       </section>
@@ -58,7 +71,9 @@ export function DashboardPage() {
             subtitle="Collected vs monthly target (₹ lakhs)"
           />
           <CardBody>
-            <FeeCollectionChart />
+            <Suspense fallback={<ChartPlaceholder />}>
+              <FeeCollectionChart />
+            </Suspense>
           </CardBody>
         </Card>
         <div className={styles.chartCardNarrow}>

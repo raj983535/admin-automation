@@ -18,57 +18,57 @@ const templates: Template[] = [
   {
     id: 'modern-landing',
     name: 'Modern Landing',
-    description: 'Clean and contemporary college homepage with hero, features, and programs',
+    description: 'Homepage with story, benefits, programs, student proof, contact, and footer.',
     category: 'landing',
-    thumbnail: '🎓',
+    thumbnail: 'HOME',
     featured: true,
-    sections: ['hero', 'features', 'programs', 'testimonials', 'contact', 'footer']
+    sections: ['hero', 'features', 'about', 'programs', 'testimonials', 'contact', 'footer'],
   },
   {
     id: 'academic-home',
     name: 'Academic Home',
-    description: 'Traditional academic layout with department highlights and research showcase',
+    description: 'Traditional academic layout for explaining departments, outcomes, and trust signals.',
     category: 'academic',
-    thumbnail: '📚',
+    thumbnail: 'ACAD',
     featured: true,
-    sections: ['hero', 'features', 'programs', 'footer']
+    sections: ['hero', 'about', 'programs', 'features', 'footer'],
   },
   {
     id: 'admissions-portal',
     name: 'Admissions Portal',
-    description: 'Focused on student recruitment with application CTAs and program details',
+    description: 'Recruitment-focused page with application CTA, scholarship benefits, and contact handoff.',
     category: 'admissions',
-    thumbnail: '🎯',
+    thumbnail: 'APPLY',
     featured: false,
-    sections: ['hero', 'features', 'programs', 'contact', 'footer']
+    sections: ['hero', 'features', 'programs', 'contact', 'footer'],
   },
   {
     id: 'events-showcase',
     name: 'Events Showcase',
-    description: 'Dynamic template for campus events and announcements',
+    description: 'Campus open day page with event benefits, student proof, and booking contact.',
     category: 'events',
-    thumbnail: '📅',
+    thumbnail: 'EVENT',
     featured: false,
-    sections: ['hero', 'features', 'testimonials', 'footer']
+    sections: ['hero', 'features', 'testimonials', 'contact', 'footer'],
   },
   {
     id: 'research-hub',
     name: 'Research Hub',
-    description: 'Highlight faculty research and academic achievements',
+    description: 'Research and faculty showcase with program pathways and proof points.',
     category: 'academic',
-    thumbnail: '🔬',
+    thumbnail: 'LAB',
     featured: false,
-    sections: ['hero', 'features', 'programs', 'footer']
+    sections: ['hero', 'about', 'features', 'programs', 'footer'],
   },
   {
     id: 'student-life',
     name: 'Student Life',
-    description: 'Showcase campus culture and student activities',
+    description: 'Campus culture page for clubs, hostel life, placements, and student stories.',
     category: 'landing',
-    thumbnail: '🎉',
+    thumbnail: 'LIFE',
     featured: false,
-    sections: ['hero', 'features', 'testimonials', 'footer']
-  }
+    sections: ['hero', 'features', 'testimonials', 'contact', 'footer'],
+  },
 ];
 
 const categories = [
@@ -76,7 +76,7 @@ const categories = [
   { id: 'landing', label: 'Landing Pages' },
   { id: 'academic', label: 'Academic' },
   { id: 'admissions', label: 'Admissions' },
-  { id: 'events', label: 'Events' }
+  { id: 'events', label: 'Events' },
 ];
 
 interface TemplateGalleryProps {
@@ -92,7 +92,7 @@ function TemplateGalleryComponent({ onSelectTemplate }: TemplateGalleryProps) {
     return templates.filter(template => {
       const matchesCategory = selectedCategory === 'all' || template.category === selectedCategory;
       const matchesSearch = template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           template.description.toLowerCase().includes(searchQuery.toLowerCase());
+        template.description.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }, [selectedCategory, searchQuery]);
@@ -111,7 +111,7 @@ function TemplateGalleryComponent({ onSelectTemplate }: TemplateGalleryProps) {
       <div className={styles.galleryHeader}>
         <div>
           <h2 className={styles.galleryTitle}>Template Gallery</h2>
-          <p className={styles.gallerySubtitle}>Choose a template to get started quickly</p>
+          <p className={styles.gallerySubtitle}>Choose a working demo template for your presentation</p>
         </div>
         <Button variant="primary" onClick={() => onSelectTemplate('blank')}>
           Start from Blank
@@ -199,7 +199,7 @@ function TemplateGalleryComponent({ onSelectTemplate }: TemplateGalleryProps) {
 
       {filteredTemplates.length === 0 && (
         <div className={styles.emptyState}>
-          <div className={styles.emptyIcon}>🔍</div>
+          <div className={styles.emptyIcon}>NO</div>
           <h4>No templates found</h4>
           <p>Try adjusting your search or category filter</p>
         </div>

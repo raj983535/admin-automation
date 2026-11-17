@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   BookOpen,
   Play,
@@ -80,6 +80,52 @@ const INITIAL_COURSES: CourseRecord[] = [
       { id: 'LES-32', title: 'Red-Black Trees & Self Balancing Nodes', duration: '25:15', completed: true },
       { id: 'LES-33', title: 'Graph Traversal & Dijkstra Shortest Path', duration: '21:30', completed: true }
     ]
+  },
+  {
+    id: 'LMS-204',
+    title: 'Operating Systems & Process Models',
+    department: 'Computer Science & Engineering',
+    instructor: 'Prof. Amit Kulkarni',
+    quizCompleted: false,
+    assignmentSubmitted: false,
+    assignmentStatus: 'in progress',
+    lessons: [
+      { id: 'LES-41', title: 'Process Scheduling & CPU Burst Cycles', duration: '16:20', completed: true },
+      { id: 'LES-42', title: 'Deadlock Detection & Banker Algorithm', duration: '22:45', completed: true },
+      { id: 'LES-43', title: 'Virtual Memory & Page Replacement Policies', duration: '19:10', completed: false },
+      { id: 'LES-44', title: 'File Systems & Disk Scheduling Strategies', duration: '17:30', completed: false },
+      { id: 'LES-45', title: 'Inter-Process Communication & Semaphores', duration: '24:15', completed: false }
+    ]
+  },
+  {
+    id: 'LMS-205',
+    title: 'Database Management Systems & SQL',
+    department: 'Information Technology',
+    instructor: 'Swati Sen',
+    quizCompleted: false,
+    assignmentSubmitted: true,
+    assignmentStatus: 'review',
+    lessons: [
+      { id: 'LES-51', title: 'ER Modeling & Relational Schema Design', duration: '18:40', completed: true },
+      { id: 'LES-52', title: 'SQL Joins & Subquery Optimization', duration: '21:20', completed: true },
+      { id: 'LES-53', title: 'Normalization Forms & Functional Dependencies', duration: '23:05', completed: true },
+      { id: 'LES-54', title: 'Transaction Control & ACID Properties', duration: '15:50', completed: false }
+    ]
+  },
+  {
+    id: 'LMS-206',
+    title: 'Software Engineering & Agile Models',
+    department: 'Computer Science & Engineering',
+    instructor: 'Dr. Sarah Jenkins',
+    quizCompleted: true,
+    assignmentSubmitted: false,
+    assignmentStatus: 'not started',
+    lessons: [
+      { id: 'LES-61', title: 'SDLC Waterfall & Iterative Lifecycles', duration: '14:15', completed: true },
+      { id: 'LES-62', title: 'Agile Scrum Sprints & Kanban Boards', duration: '20:30', completed: true },
+      { id: 'LES-63', title: 'UML Class & Sequence Diagram Notation', duration: '18:45', completed: false },
+      { id: 'LES-64', title: 'Software Testing & Quality Assurance Metrics', duration: '22:10', completed: false }
+    ]
   }
 ];
 
@@ -97,6 +143,21 @@ const QUIZ_QUESTIONS: Record<string, { question: string; options: string[]; corr
   'LMS-203': {
     question: 'What is the worst-case search complexity of a fully balanced Red-Black Tree?',
     options: ['O(1)', 'O(log N)', 'O(N)', 'O(N log N)'],
+    correctIdx: 1
+  },
+  'LMS-204': {
+    question: 'Which page replacement algorithm suffers from Belady\'s anomaly?',
+    options: ['Optimal (OPT)', 'Least Recently Used (LRU)', 'First-In First-Out (FIFO)', 'Least Frequently Used (LFU)'],
+    correctIdx: 2
+  },
+  'LMS-205': {
+    question: 'Which normal form eliminates transitive functional dependencies?',
+    options: ['First Normal Form (1NF)', 'Second Normal Form (2NF)', 'Third Normal Form (3NF)', 'Boyce-Codd Normal Form (BCNF)'],
+    correctIdx: 2
+  },
+  'LMS-206': {
+    question: 'In Agile Scrum methodology, what is a time-boxed iteration called?',
+    options: ['Milestone', 'Sprint', 'Epoch', 'Release Cycle'],
     correctIdx: 1
   }
 };

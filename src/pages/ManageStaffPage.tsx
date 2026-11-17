@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Search,
   Plus,
@@ -22,6 +22,8 @@ interface StaffMember {
   responsibility: string;
   phone: string;
 }
+
+type StaffRole = StaffMember['role'];
 
 interface Department {
   id: string;
@@ -98,6 +100,26 @@ const INITIAL_STAFF: StaffMember[] = [
     responsibility: 'Sports Coordinator (On Sabbatical Leaves)',
     phone: '+1 (555) 019-5562',
   },
+  {
+    id: 'STF-507',
+    name: 'Swati Sen',
+    email: 'swati.sen@college.edu',
+    role: 'faculty',
+    department: 'Biotechnology',
+    joined: '2023-01-15',
+    responsibility: 'Lecturer, Molecular Biology & Genomics Lab Coordinator',
+    phone: '+91 98765 07823',
+  },
+  {
+    id: 'STF-508',
+    name: 'Dr. Ramesh Prasad',
+    email: 'ramesh.prasad@college.edu',
+    role: 'management',
+    department: 'Library Sciences',
+    joined: '2017-06-20',
+    responsibility: 'Chief Librarian & Digital Repository Architect',
+    phone: '+91 98765 08134',
+  },
 ];
 
 const INITIAL_DEPARTMENTS: Department[] = [
@@ -105,6 +127,8 @@ const INITIAL_DEPARTMENTS: Department[] = [
   { id: 'DEP-02', name: 'Academic Affairs', head: 'Dr. Sarah Jenkins', count: 8 },
   { id: 'DEP-03', name: 'Accounts & Audits', head: 'Rohan Sharma', count: 5 },
   { id: 'DEP-04', name: 'Registrar Office', head: 'Meera Deshmukh', count: 12 },
+  { id: 'DEP-05', name: 'Student Facilities', head: 'Anita Roy', count: 7 },
+  { id: 'DEP-06', name: 'Biotechnology', head: 'Swati Sen', count: 9 },
 ];
 
 const INITIAL_PERMISSIONS: Record<string, string[]> = {
@@ -153,7 +177,7 @@ export function ManageStaffPage() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newStaffName, setNewStaffName] = useState('');
   const [newStaffEmail, setNewStaffEmail] = useState('');
-  const [newStaffRole, setNewStaffRole] = useState<'admin' | 'management' | 'faculty' | 'finance' | 'support'>('faculty');
+  const [newStaffRole, setNewStaffRole] = useState<StaffRole>('faculty');
   const [newStaffDept, setNewStaffDept] = useState('Computer Science');
   const [newStaffResp, setNewStaffResp] = useState('');
   const [newStaffPhone, setNewStaffPhone] = useState('');
@@ -412,7 +436,7 @@ export function ManageStaffPage() {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                     <label className={styles.formLabel}>
                       <span>Primary Role Group *</span>
-                      <select value={newStaffRole} onChange={e => setNewStaffRole(e.target.value as any)} className={styles.formSelect}>
+                      <select value={newStaffRole} onChange={e => setNewStaffRole(e.target.value as StaffRole)} className={styles.formSelect}>
                         <option value="admin">Admin</option>
                         <option value="management">Management</option>
                         <option value="faculty">Faculty</option>
@@ -677,7 +701,7 @@ export function ManageStaffPage() {
                 <span>Modify Security Clearance Role</span>
                 <select
                   value={selectedStaff.role}
-                  onChange={e => handleUpdateStaffRole(selectedStaff.id, e.target.value as any)}
+                  onChange={e => handleUpdateStaffRole(selectedStaff.id, e.target.value as StaffRole)}
                   className={styles.formSelect}
                 >
                   <option value="admin">Admin</option>

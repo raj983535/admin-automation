@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer, ModulePageHeader } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Plus,
   Rocket,
@@ -95,6 +95,8 @@ interface Campaign {
   headline: string;
   description: string;
 }
+
+type BudgetType = Campaign['budgetType'];
 
 const INITIAL_CAMPAIGNS: Campaign[] = [
   {
@@ -650,7 +652,7 @@ export function AdLauncherPage() {
                           <span>Budget Schedule</span>
                           <select
                             value={budgetType}
-                            onChange={(e) => setBudgetType(e.target.value as any)}
+                            onChange={(e) => setBudgetType(e.target.value as BudgetType)}
                             className={styles.formSelect}
                           >
                             <option value="Daily">Daily Budget Limit</option>

@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   ChevronRight,
   ChevronLeft,
@@ -20,6 +20,8 @@ interface Task {
   dueDate: string;
   description: string;
 }
+
+type TaskPriority = Task['priority'];
 
 interface Project {
   id: string;
@@ -84,6 +86,24 @@ const INITIAL_PROJECTS: Project[] = [
     completion: 100,
     startDate: '2025-12-01',
     endDate: '2026-04-15',
+  },
+  {
+    id: 'PRJ-106',
+    name: 'Campus ERP Migration',
+    desc: 'Migrating legacy student management system to the new CollegeOS unified platform.',
+    status: 'active',
+    completion: 55,
+    startDate: '2026-01-15',
+    endDate: '2026-07-30',
+  },
+  {
+    id: 'PRJ-107',
+    name: 'Library Digitization Drive',
+    desc: 'Scanning archival thesis collections, rare journals, and mapping ISBN catalog to cloud repository.',
+    status: 'planning',
+    completion: 15,
+    startDate: '2026-04-01',
+    endDate: '2026-10-31',
   },
 ];
 
@@ -162,6 +182,40 @@ const INITIAL_TASKS: Task[] = [
     priority: 'medium',
     dueDate: '2026-06-15',
     description: 'Map internal coaxial loops bounds to prevent interference patterns.',
+  },
+
+  // National CSE Workshop
+  {
+    id: 'TSK-231',
+    projectId: 'PRJ-104',
+    title: 'Confirm Keynote Speaker Panel',
+    assignedTo: 'Dr. Sarah Jenkins',
+    column: 'todo',
+    priority: 'high',
+    dueDate: '2026-06-20',
+    description: 'Finalize invitations for distinguished AI/ML researchers from IITs and international partners.',
+  },
+  {
+    id: 'TSK-222',
+    projectId: 'PRJ-103',
+    title: 'Shortlist Wi-Fi Vendor Proposals',
+    assignedTo: 'Rohan Sharma',
+    column: 'todo',
+    priority: 'high',
+    dueDate: '2026-06-10',
+    description: 'Evaluate cost estimates from Cisco, Ubiquiti, and Aruba for campus-wide mesh deployment.',
+  },
+
+  // Campus ERP Migration
+  {
+    id: 'TSK-241',
+    projectId: 'PRJ-106',
+    title: 'Audit Legacy Student Data Integrity',
+    assignedTo: 'Meera Deshmukh',
+    column: 'inprogress',
+    priority: 'high',
+    dueDate: '2026-06-30',
+    description: 'Cross-verify 12,000+ enrollment records against physical admission registers before migration.',
   },
 ];
 
@@ -462,7 +516,7 @@ export function ProjectManagementPage() {
                 </label>
                 <label className={styles.formLabel}>
                   <span>Priority Severity *</span>
-                  <select value={newPriority} onChange={e => setNewPriority(e.target.value as any)} className={styles.formSelect}>
+                  <select value={newPriority} onChange={e => setNewPriority(e.target.value as TaskPriority)} className={styles.formSelect}>
                     <option value="low">Low Priority</option>
                     <option value="medium">Medium Priority</option>
                     <option value="high">High Priority</option>

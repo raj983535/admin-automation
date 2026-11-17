@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Inbox,
   Send,
@@ -130,6 +130,54 @@ const INITIAL_INQUIRIES: StudentInquiry[] = [
       { id: 'm6-1', sender: 'student', text: 'Can I get direct admission in B.Tech IT without JEE scores?', time: '3 days ago' },
       { id: 'm6-2', sender: 'ai', text: 'All direct admissions are subject to qualifying exam marks. Candidates without JEE score must appear for the College Scholastic Entrance Test (CSET).', time: '3 days ago' }
     ]
+  },
+  {
+    id: 'inq-7',
+    studentName: 'Priya Pillai',
+    applicationId: 'APP-2026-518',
+    targetDegree: 'B.Tech CSE',
+    subject: 'Lateral Entry from Diploma — Eligibility',
+    status: 'new inquiry',
+    lastMessageTime: '11:40 AM',
+    qualificationScore: 55,
+    tags: ['Freshman', 'Document Verified'],
+    messages: [
+      { id: 'm7-1', sender: 'student', text: 'I completed my Computer Science diploma with 78% aggregate. Am I eligible for lateral entry into B.Tech CSE 3rd semester?', time: '11:35 AM' },
+      { id: 'm7-2', sender: 'student', text: 'Also, do I need to appear for CSET or is the diploma score sufficient?', time: '11:40 AM' }
+    ],
+    aiDraftReply: 'Yes, diploma holders with 60%+ aggregate are eligible for lateral entry to 3rd semester B.Tech. You will need to clear the CSET Lateral Entry exam scheduled in June. Your 78% diploma score qualifies you. Shall I share the CSET syllabus PDF?'
+  },
+  {
+    id: 'inq-8',
+    studentName: 'Sahil Sharma',
+    applicationId: 'APP-2026-201',
+    targetDegree: 'B.Tech CSE',
+    subject: 'Hostel Double-Sharing Availability',
+    status: 'AI handled',
+    lastMessageTime: '09:15 AM',
+    qualificationScore: 80,
+    tags: ['Hostel Required', 'Ready to Apply', 'High Intent'],
+    messages: [
+      { id: 'm8-1', sender: 'student', text: 'Is double-sharing hostel still available for B.Tech CSE freshers joining in August? What is included in the hostel fee?', time: '09:10 AM' },
+      { id: 'm8-2', sender: 'ai', text: 'Double-sharing hostel rooms are currently available for Fall 2026 intake. The annual fee of Rs 1,10,000 covers accommodation, mess (3 meals/day), laundry service, and high-speed Wi-Fi. Bookings close on July 20th.', time: '09:15 AM' }
+    ]
+  },
+  {
+    id: 'inq-9',
+    studentName: 'Ananya Iyer',
+    applicationId: 'APP-2026-877',
+    targetDegree: 'MBA Finance',
+    subject: 'International Transfer Credit Evaluation',
+    status: 'human escalation',
+    lastMessageTime: '12:20 PM',
+    qualificationScore: 72,
+    tags: ['Scholarship Eligible', 'High Intent'],
+    messages: [
+      { id: 'm9-1', sender: 'student', text: 'I completed 2 semesters of an MBA program at a UK university. Can these credits be transferred towards the MBA Finance program here?', time: '12:05 PM' },
+      { id: 'm9-2', sender: 'ai', text: 'International credit transfer requests are evaluated on a case-by-case basis by the Academic Council. I am escalating this to our registrar for a detailed credit mapping assessment.', time: '12:08 PM' },
+      { id: 'm9-3', sender: 'student', text: 'Thank you. I can share my UK university transcript and syllabus for comparison.', time: '12:20 PM' }
+    ],
+    aiDraftReply: 'Thank you Ananya. I have flagged your transcript for Meera Deshmukh (Registrar) to conduct a formal credit equivalence review. Please upload your UK university transcript via the student portal documents section.'
   }
 ];
 
@@ -147,7 +195,7 @@ export function AiAgentInboxPage() {
 
   // Editing state for AI Draft reply
   const [isEditingDraft, setIsEditingDraft] = useState(false);
-  const [draftEditorText, setDraftEditorText] = useState('');
+  const [draftEditorText, setDraftEditorText] = useState(INITIAL_INQUIRIES[0].aiDraftReply || '');
   
   // Custom manual reply state
   const [manualReplyText, setManualReplyText] = useState('');
@@ -162,21 +210,13 @@ export function AiAgentInboxPage() {
     return inquiries.find(i => i.id === selectedId) || inquiries[0];
   }, [inquiries, selectedId]);
 
-  // Load active AI draft to editor when selected inquiry changes
-  useEffect(() => {
-    if (activeInq && activeInq.aiDraftReply) {
-      setDraftEditorText(activeInq.aiDraftReply);
-    } else {
-      setDraftEditorText('');
-    }
+  const handleSelectInquiry = (inq: StudentInquiry) => {
+    setSelectedId(inq.id);
+    setDraftEditorText(inq.aiDraftReply || '');
     setIsEditingDraft(false);
     setManualReplyText('');
-    
-    // Smooth scroll local panel viewport instead of whole window
-    if (messagesViewportRef.current) {
-      messagesViewportRef.current.scrollTop = messagesViewportRef.current.scrollHeight;
-    }
-  }, [selectedId, activeInq]);
+    setActiveMobileView('chat');
+  };
 
   // Scroll to bottom on new messages
   useEffect(() => {
@@ -476,8 +516,7 @@ export function AiAgentInboxPage() {
                   <div 
                     key={inq.id}
                     onClick={() => {
-                      setSelectedId(inq.id);
-                      setActiveMobileView('chat');
+                      handleSelectInquiry(inq);
                     }}
                     className={`${styles.inquiryListItem} ${isSelected ? styles.inquirySelected : ''}`}
                     style={{ borderLeftColor: `var(--stage-${statusProps.stage}-text)` }}

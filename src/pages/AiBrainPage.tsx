@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button, StageChip } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Send,
   Upload,
@@ -27,6 +27,8 @@ interface KnowledgeItem {
   dateAdded: string;
 }
 
+type KnowledgeCategory = KnowledgeItem['category'];
+
 interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
@@ -40,12 +42,18 @@ const INITIAL_KNOWLEDGE: KnowledgeItem[] = [
   { id: 'kn-2', name: 'MBA Fee & Installment Structure.xlsx', category: 'Fee Structure', size: '1.2 MB', status: 'Trained', tokens: '38K tokens', dateAdded: '2026-05-12' },
   { id: 'kn-3', name: 'Undergraduate Course Catalog.pdf', category: 'Course Catalog', size: '8.4 MB', status: 'Trained', tokens: '290K tokens', dateAdded: '2026-05-15' },
   { id: 'kn-4', name: 'Admissions FAQs & Eligibility Criteria.txt', category: 'FAQ', size: '240 KB', status: 'Trained', tokens: '18K tokens', dateAdded: '2026-05-18' },
+  { id: 'kn-5', name: 'Hostel Rules & Accommodation Policy 2026.pdf', category: 'Brochure', size: '3.1 MB', status: 'Trained', tokens: '86K tokens', dateAdded: '2026-05-20' },
+  { id: 'kn-6', name: 'B.Tech Biotech Eligibility Matrix.pdf', category: 'Eligibility', size: '1.6 MB', status: 'Trained', tokens: '52K tokens', dateAdded: '2026-05-22' },
+  { id: 'kn-7', name: 'Postgraduate Research Fellowship Guide.pdf', category: 'Course Catalog', size: '5.9 MB', status: 'Trained', tokens: '178K tokens', dateAdded: '2026-05-25' },
 ];
 
 const PRELOADED_FAQ_PAIRS = [
   { q: 'What are the eligibility criteria for B.Tech CSE?', a: 'Candidates must have passed 10+2 with Physics, Mathematics, and Chemistry with a minimum aggregate of 60% marks.' },
   { q: 'What is the annual fee for the MBA program?', a: 'The annual tuition fee for MBA is Rs 2,50,000, payable in two installments (July and December).' },
   { q: 'What documents are required during physical counseling?', a: 'Required: 10th & 12th mark sheets, JEE Main scorecard, category certificate, migration transfer certificate, and 4 passport-size photographs.' },
+  { q: 'Is hostel accommodation mandatory for outstation students?', a: 'Hostel is not mandatory. However, outstation students are strongly recommended to opt for campus housing. Double-sharing rooms cost Rs 1,10,000/year inclusive of mess and laundry.' },
+  { q: 'What is the last date for admission applications?', a: 'The final deadline for Fall 2026 applications is July 31, 2026. Late applications are accepted until August 10 with a Rs 500 late fee surcharge.' },
+  { q: 'Can lateral entry students apply for B.Tech third year?', a: 'Yes, diploma holders with 60% aggregate can apply for lateral entry into 3rd semester B.Tech programs via the CSET Lateral Entry examination held in June.' },
 ];
 
 export function AiBrainPage() {
@@ -319,7 +327,7 @@ export function AiBrainPage() {
                         <span>Document Category</span>
                         <select 
                           value={uploadCategory} 
-                          onChange={(e: any) => setUploadCategory(e.target.value)}
+                          onChange={(e) => setUploadCategory(e.target.value as KnowledgeCategory)}
                           className={styles.controlSelect}
                         >
                           <option value="Brochure">Brochure Catalog</option>

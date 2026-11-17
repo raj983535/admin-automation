@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Plus,
   Trash2,
@@ -17,6 +17,8 @@ interface AutomationNode {
   stageBadge: string;
   config: Record<string, string>;
 }
+
+type AutomationStageColor = AutomationNode['stageColor'];
 
 const INITIAL_NODES: AutomationNode[] = [
   {
@@ -246,7 +248,7 @@ export function WorkflowAutomationPage() {
                       <span className={styles.toolbarTitle}>Add Pipeline Step:</span>
                       <select
                         value={newStepType}
-                        onChange={(e: any) => setNewStepType(e.target.value)}
+                        onChange={(e) => setNewStepType(e.target.value as AutomationStageColor)}
                         className={styles.nodeSelect}
                         style={{ fontSize: '11px', padding: '3px 6px', width: 'auto' }}
                       >

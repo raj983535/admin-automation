@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { PageContainer } from '../layouts';
 import { Card, CardBody, CardHeader, Button } from '../components/ui';
-import { useNotifications } from '../contexts/NotificationContext';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   Store,
   Video,
@@ -91,6 +91,39 @@ export function AppStorePage() {
       apiEndpoint: 'https://slack.com/api/chat.postMessage',
       clientKey: 'xoxb-college-2299-ff3a',
     },
+    {
+      id: 'APP-06',
+      name: 'Razorpay Payment Gateway',
+      category: 'Payments',
+      desc: 'Process UPI, netbanking, and card-based tuition payments with instant settlement, automated refund workflows, and parent invoice generation.',
+      status: 'connected',
+      installedAt: '2026-04-12',
+      syncCount: 1845,
+      apiEndpoint: 'https://api.razorpay.com/v1/college-orders',
+      clientKey: 'rzp_live_9Kf8aB2mN4x',
+    },
+    {
+      id: 'APP-07',
+      name: 'Microsoft Teams Webinars',
+      category: 'Video Conferencing',
+      desc: 'Host virtual open house sessions, faculty training workshops, and parent–teacher conferences with breakout room capabilities.',
+      status: 'disconnected',
+      installedAt: null,
+      syncCount: 0,
+      apiEndpoint: 'https://graph.microsoft.com/v1.0/college-teams',
+      clientKey: '',
+    },
+    {
+      id: 'APP-08',
+      name: 'Mailchimp Email Campaigns',
+      category: 'Communication',
+      desc: 'Design drip email sequences for admission nurturing, alumni engagement newsletters, and event broadcast marketing campaigns.',
+      status: 'connected',
+      installedAt: '2026-03-22',
+      syncCount: 3120,
+      apiEndpoint: 'https://us14.api.mailchimp.com/3.0/college-lists',
+      clientKey: 'mc_api_f882c1d39a',
+    },
   ]);
 
   // Drawer / Selection state
@@ -105,6 +138,8 @@ export function AppStorePage() {
     { id: 'SYN-001', app: 'Twilio SMS Provider', details: 'Dispatched parent advisory notices for admissions Q2', time: '10 mins ago' },
     { id: 'SYN-002', app: 'Google Calendar Sync', details: 'Remapped Dr. Sarah Jenkins availability slot vectors', time: '1 hour ago' },
     { id: 'SYN-003', app: 'Stripe Merchant Gateway', details: 'Successfully audited B.Tech tuition fee invoice ref STF-501', time: '2 hours ago' },
+    { id: 'SYN-004', app: 'Razorpay Payment Gateway', details: 'Processed 42 UPI tuition payments for MBA Finance batch — Rs 12.4L settled', time: '3 hours ago' },
+    { id: 'SYN-005', app: 'Mailchimp Email Campaigns', details: 'Drip sequence "Fall 2026 Admission Reminder" sent to 1,240 prospective leads', time: '4 hours ago' },
   ]);
 
   // Categories list
